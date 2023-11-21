@@ -1,4 +1,10 @@
-import styles from './MainContainer.module.css';
+import { Outlet } from "react-router-dom";
+import styles from "./MainContainer.module.css";
 
-// ms...
-
+export default function MainContainer() {
+  return (
+    <div className={styles.mainContainer}>
+      <Outlet />
+    </div>
+  );
+}
