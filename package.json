@@ -19,7 +19,8 @@
     "react-css-modules": "^4.7.11",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.19.0",
-    "styled-components": "^6.1.1"
+    "styled-components": "^6.1.1",
+    "axios": "^1.6.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

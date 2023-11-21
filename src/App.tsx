@@ -1,4 +1,5 @@
 import "./App.css";
+import HelloWorld from "./components/TestHelloWorld/TestHelloWorld";
 import CssBaseline from "@mui/material/CssBaseline";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import BaseLayout from "./components/BaseLayout/BaseLayout";
@@ -14,7 +15,7 @@ function App() {
           <Routes>
             <Route element={<BaseLayout />}>
               <Route path="/" element={<Home />} />
-              <Route path="/HelloWorld" element={<Home />} />
+              <Route path="/HelloWorld" element={<HelloWorld />} />
             </Route>
           </Routes>
         </BrowserRouter>
