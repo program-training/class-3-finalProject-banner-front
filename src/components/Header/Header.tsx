@@ -1,4 +1,7 @@
 import styles from './Header.module.css';
 
-// ms...
-
+export default function Header() {
+    return (
+        <header className={styles.header}>Header</header>
+    );
+}
