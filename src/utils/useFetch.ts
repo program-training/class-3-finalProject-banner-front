@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { RecommendedBannersProps, ProductInterface } from "./interfaces";
+import { ProductInterface } from "./interfaces";
 import { BASE_URL } from "./consts";
 
 export const useFetch = (url: string) => {
   const [recommendedBanners, setRecommendedBanners] = useState<
-    RecommendedBannersProps[]
+    ProductInterface[]
   >([]);
   const [products, setProducts] = useState<ProductInterface[]>([]);
 
@@ -27,5 +27,5 @@ export const useFetch = (url: string) => {
     fetchData();
   }, []);
 
-  return {recommendedBanners, setRecommendedBanners, products, setProducts};
+  return { recommendedBanners, setRecommendedBanners, products, setProducts };
 };

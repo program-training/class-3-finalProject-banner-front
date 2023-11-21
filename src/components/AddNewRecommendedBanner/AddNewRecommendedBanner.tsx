@@ -12,14 +12,19 @@ const AddNewRecommendedBanner = () => {
     try {
       setIsClicked(true);
       const newBannerData = {
-        _id: product.id,
+        id: product.id,
+        name: product.name,
+        salePrice: product.salePrice,
+        quantity: product.quantity,
+        description: product.description,
+        category: product.category,
+        discountPercentage: product.discountPercentage,
         image: {
           url: product.image.url,
           alt: product.image.alt,
         },
-        text: product.description,
-        createdAt: new Date(),
-        author: "",
+        createdAt: product.createdAt,
+        author: product.author,
       };
       const res = await axios.post(`${BASE_URL}/api/banners`, newBannerData);
       if (res.status < 300 && res.status >= 200) {

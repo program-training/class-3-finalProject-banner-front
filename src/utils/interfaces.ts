@@ -1,10 +1,3 @@
-export interface RecommendedBannersProps {
-  id: string;
-  image: string;
-  text: string;
-  alt: string;
-}
-
 export interface ProductInterface {
   id: string;
   name: string;
@@ -17,4 +10,6 @@ export interface ProductInterface {
     url: string;
     alt: string;
   };
+  createdAt: Date;
+  author: string;
 }

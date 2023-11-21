@@ -23,8 +23,10 @@ const RecommendedBanners = () => {
     <div>
       {recommendedBanners.map((banner) => (
         <div key={banner.id}>
-          <img src={banner.image} alt={banner.alt} />
-          <p>{banner.text}</p>
+          <p>{banner.name}</p>
+          <p>{banner.description}</p>
+          <p>{banner.category}</p>
+          <img src={banner.image.url} alt={banner.image.alt} />
           <button onClick={() => handleClick(banner.id)}>Delete Banner</button>
         </div>
       ))}
