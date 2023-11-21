@@ -1,37 +1,9 @@
-import { useState, useEffect } from "react";
 import axios from "axios";
-
-interface RecommendedBannersProps {
-  id: string;
-  image: string;
-  text: string;
-  alt: string;
-}
-
+import { useFetch } from "../../utils/useFetch";
 const RecommendedBanners = () => {
-  const [recommendedBanners, setRecommendedBanners] = useState<
-    RecommendedBannersProps[]
-  >([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(
-          "http://localhost:8181/api/recommendedBanners"
-        );
-        if (res.status < 300 && res.status >= 200) {
-          const data = res.data;
-          setRecommendedBanners(data);
-        } else {
-          console.log("error fetching data", res.status);
-        }
-      } catch (err) {
-        console.error(err);
-        throw err;
-      }
-    };
-    fetchData();
-  }, []);
+  const { recommendedBanners, setRecommendedBanners } = useFetch(
+    "/api/recommendedBanners"
+  );
 
   const handleClick = async (bannerId: string) => {
     try {

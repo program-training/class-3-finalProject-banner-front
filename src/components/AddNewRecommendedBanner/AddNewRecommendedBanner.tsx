@@ -1,41 +1,65 @@
 import axios from "axios";
 import { useState } from "react";
+import { useFetch } from "../../utils/useFetch";
+import { BASE_URL } from "../../utils/consts";
+import { ProductInterface } from "../../utils/interfaces";
 
 const AddNewRecommendedBanner = () => {
-  const [newBannerData, setNewBannerData] = useState({
-    _id: "",
-    image: {
-      url: "",
-      alt: "",
-    },
-    text: "",
-    createdAt: new Date(),
-    author: "",
-  });
+  const { products } = useFetch(`${BASE_URL}/api/products`);
   const [isClicked, setIsClicked] = useState(false);
 
-  const handleClick = async () => {
+  const handleProductClick = async (product: ProductInterface) => {
     try {
       setIsClicked(true);
-      const res = await axios.post(
-        "http://localhost:8181/api/banners",
-        newBannerData
-      );
+      const newBannerData = {
+        _id: product.id,
+        image: {
+          url: product.image.url,
+          alt: product.image.alt,
+        },
+        text: product.description,
+        createdAt: new Date(),
+        author: "",
+      };
+      const res = await axios.post(`${BASE_URL}/api/banners`, newBannerData);
       if (res.status < 300 && res.status >= 200) {
         const createdBanner = res.data;
-        setNewBannerData(createdBanner);
+        console.log("Banner created:", createdBanner);
       } else {
-        console.log("error fetching data", res.status);
+        console.log("Error creating banner", res.status);
       }
     } catch (err) {
       console.error(err);
-      throw err;
     }
+  };
+
+  const handleAddBannerClick = () => {
+    setIsClicked(true);
   };
 
   return (
     <div>
-      {!isClicked && <button onClick={handleClick}>Add New Banner</button>}
+      {!isClicked && (
+        <button onClick={handleAddBannerClick}>Add New Banner</button>
+      )}
+
+      {isClicked && (
+        <div>
+          {products.map((product) => (
+            <div key={product.id}>
+              <button onClick={() => handleProductClick(product)}>
+                <p>{product.name}</p>
+                <p>{product.salePrice}</p>
+                <p>{product.quantity}</p>
+                <p>{product.description}</p>
+                <p>{product.category}</p>
+                <p>{product.discountPercentage}</p>
+                <img src={product.image.url} alt={product.image.alt} />
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
