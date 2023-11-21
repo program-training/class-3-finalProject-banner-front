@@ -12,7 +12,7 @@ const AddNewRecommendedBanner = () => {
     try {
       setIsClicked(true);
       const newBannerData = {
-        id: product.id,
+        id: product.recProductId,
         name: product.name,
         salePrice: product.salePrice,
         quantity: product.quantity,
@@ -51,7 +51,7 @@ const AddNewRecommendedBanner = () => {
       {isClicked && (
         <div>
           {products.map((product) => (
-            <div key={product.id}>
+            <div key={product.recProductId}>
               <button onClick={() => handleProductClick(product)}>
                 <p>{product.name}</p>
                 <p>{product.salePrice}</p>
