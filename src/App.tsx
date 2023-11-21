@@ -1,18 +1,24 @@
 import "./App.css";
 import CssBaseline from "@mui/material/CssBaseline";
-import Header from "./components/Header/Header";
-import MainContainer from "./components/MainContainer/MainContainer";
-import Footer from "./components/Footer/Footer";
-import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import BaseLayout from "./components/BaseLayout/BaseLayout";
+import Home from "./components/Home/Home";
 
 function App() {
   return (
     <>
-      <CssBaseline >
-          <Header />
-          <MainContainer />
-          <Footer />
-      </CssBaseline>
+      <CssBaseline />
+
+
+      <BrowserRouter>
+          <Routes>
+            <Route element={<BaseLayout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/HelloWorld" element={<Home />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+
     </>
   );
 }
