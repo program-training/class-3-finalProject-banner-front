@@ -1,6 +1,12 @@
 import axios from "axios";
 import { useFetch } from "../../utils/useFetch";
 import { Link } from "react-router-dom";
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 const RecommendedBanners = () => {
   const { recommendedBanners, setRecommendedBanners } = useFetch(
@@ -10,7 +16,7 @@ const RecommendedBanners = () => {
   const handleClick = async (bannerId: string) => {
     try {
       await axios.delete(
-        `http://localhost:8181/api/recommendedBanners/${bannerId}`
+        `${import.meta.env.BASE_URL}/recommendedBanners/${bannerId}`
       );
       setRecommendedBanners((prevBanners) =>
         prevBanners.filter((banner) => banner.recProductId !== bannerId)
@@ -23,22 +29,42 @@ const RecommendedBanners = () => {
 
   return (
     <div>
-      {recommendedBanners.map((banner) => (
-        <div key={banner.recProductId}>
-          <Link to={""} state={banner}>
-            <p>{banner.name}</p>
-            <p>{banner.description}</p>
-            <p>{banner.category}</p>
-            <img src={banner.image.url} alt={banner.image.alt} />
-            <p>{banner.createdAt.toLocaleString()}</p>
-            <p>{banner.author}</p>
-            <button onClick={() => handleClick(banner.recProductId)}>
-              Delete Banner
-            </button>
-          </Link>
-        </div>
-      ))}
-    </div>
+    {recommendedBanners.map((banner) => (
+      <div key={banner.recProductId}>
+        <Link to={""} state={banner}>
+          <Card sx={{ maxWidth: 345 }}>
+            <CardMedia
+              sx={{ height: 140 }}
+              image={banner.image.url}
+              title={banner.image.alt}
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {banner.name}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {banner.description}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {banner.category}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {banner.createdAt.toLocaleString()}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {banner.author}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small" onClick={() => handleClick(banner.recProductId)}>
+                Delete Banner
+              </Button>
+            </CardActions>
+          </Card>
+        </Link>
+      </div>
+    ))}
+  </div>
   );
 };
 
