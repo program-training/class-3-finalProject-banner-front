@@ -9,13 +9,11 @@ function App() {
   return (
     <>
       <CssBaseline />
-
-
       <BrowserRouter>
           <Routes>
-            <Route element={<BaseLayout />}>
-              <Route path="/" element={<Home />} />
-              <Route path="/HelloWorld" element={<HelloWorld />} />
+              <Route element={<BaseLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/HelloWorld" element={<HelloWorld />} />
             </Route>
           </Routes>
         </BrowserRouter>
