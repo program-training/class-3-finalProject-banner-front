@@ -1,4 +1,9 @@
 import styles from './Register.module.css';
 
-// ms...
 
+export default function Register() {
+    return (
+        <>
+        </>
+    )
+}
