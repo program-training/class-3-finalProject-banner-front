@@ -11,7 +11,7 @@ export const useFetch = (url: string) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
+      try { 
         const res = await axios.get(`${BASE_URL}${url}`);
         if (res.status < 300 && res.status >= 200) {
           const data = res.data;
