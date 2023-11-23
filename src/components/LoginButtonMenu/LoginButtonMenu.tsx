@@ -8,8 +8,7 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { Badge, IconButton } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
-import SignIn from '../Login/SignIn';
-import Register from '../Register/Register';
+
 
 export default function LoginButtonMenu() {
 
