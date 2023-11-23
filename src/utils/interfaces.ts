@@ -7,7 +7,9 @@ export interface ProductInterface {
   category: string;
   discountPercentage: number;
   image: {
-    url: string;
+    large: string;
+    medium: string;
+    small: string;
     alt: string;
   };
   createdAt: Date;
@@ -15,14 +17,14 @@ export interface ProductInterface {
 }
 
 export interface BannersInterFace {
-  _id: string
+  _id: string;
   image: {
-    url: string
-    alt: string
-  }
-  text: string
-  userName: string
-  email: string
-  password: string
-  isAdmin: boolean
+    url: string;
+    alt: string;
+  };
+  text: string;
+  userName: string;
+  email: string;
+  password: string;
+  isAdmin: boolean;
 }
