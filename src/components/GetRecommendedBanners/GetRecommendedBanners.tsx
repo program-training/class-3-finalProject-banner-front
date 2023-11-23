@@ -12,14 +12,12 @@ const GetRecommendedBanners = () => {
 
   const { recommendedBanners, setRecommendedBanners } = useFetchRecBanners(
     "/recommended/recProducts"
-
   );
-
   const handleClick = async (bannerId: string) => {
     try {
       await axios.delete(
         `${
-          import.meta.env.VITE_BASE_URL
+          import.meta.env.VITE_BASE_URL_API_RENDER
         }/api/recommended/recProducts/${bannerId}`
       );
       setRecommendedBanners((prevBanners) =>
@@ -35,11 +33,11 @@ const GetRecommendedBanners = () => {
     <div>
       {recommendedBanners.map((banner) => (
         <div key={banner.recProductId}>
-          <Link to={""} state={banner}>
+          <Link to={"/recBannerInfo"} state={banner}>
             <Card sx={{ maxWidth: 345 }}>
               <CardMedia
                 sx={{ height: 140 }}
-                image={banner.image.url}
+                image={banner.image.medium}
                 title={banner.image.alt}
               />
               <CardContent>
