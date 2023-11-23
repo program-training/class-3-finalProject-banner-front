@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import HelloWorld from "../TestHelloWorld/TestHelloWorld";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import GetAllBanners from "../Banner/GetAllBanners";
 
 export default function Home() {
   
@@ -18,8 +19,8 @@ export default function Home() {
   return (
     <div className={styles.context}>
       <h1>Home</h1>
-
       <HelloWorld/>
+      <GetAllBanners />
     </div>
   );
 }
