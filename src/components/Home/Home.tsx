@@ -1,6 +1,7 @@
 import styles from "./Home.module.css";
 import SignIn from "../Login/SignIn";
 import Popup from "../Popup/Popup";
+import GetAllBanners from "../Banner/GetAllBanners";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       <Popup>
         <SignIn/>
       </Popup>
+      <GetAllBanners />
     </div>
   );
 }

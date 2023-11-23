@@ -5,10 +5,11 @@ import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import LoginButtonMenu from '../LoginButtonMenu/LoginButtonMenu';
+import MenuButtonAccount from '../MenuButtonAccount/MenuButtonAccount';
 import HomeIconButton from '../HomeIconButton/HomeIconButton';
 
 export default function HeaderMenuItem() {
+
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -60,7 +61,7 @@ export default function HeaderMenuItem() {
             aria-haspopup="true"
             color="inherit"
           >
-            <LoginButtonMenu />
+            <MenuButtonAccount />
           </IconButton>
           <p>Profile</p>
         </MenuItem>

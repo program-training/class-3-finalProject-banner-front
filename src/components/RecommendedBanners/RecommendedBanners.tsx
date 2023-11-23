@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useFetch } from "../../utils/useFetch";
+import { useFetch } from "../../utils/useFetchRecBanners";
 import { Link } from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -16,7 +16,7 @@ const RecommendedBanners = () => {
   const handleClick = async (bannerId: string) => {
     try {
       await axios.delete(
-        `${import.meta.env.BASE_URL}/recommendedBanners/${bannerId}`
+        `${import.meta.env.BASE_URL}/api/recommendedBanners/${bannerId}`
       );
       setRecommendedBanners((prevBanners) =>
         prevBanners.filter((banner) => banner.recProductId !== bannerId)
