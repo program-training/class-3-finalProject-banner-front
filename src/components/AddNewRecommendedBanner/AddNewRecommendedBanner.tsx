@@ -1,16 +1,22 @@
 import axios from "axios";
 import { useFetch } from "../../utils/useFetchRecBanners";
 import { ProductInterface } from "../../utils/interfaces";
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import { Button, CardActionArea, CardActions } from "@mui/material";
 
 const AddNewRecommendedBanner = () => {
   const { products } = useFetch(`${import.meta.env.BASE_URL}/api/products`);
 
-  const handleProductClick = async (product: ProductInterface) => {
+  const handleProductClick = async (
+    event: React.MouseEvent<HTMLButtonElement> | undefined,
+    product: ProductInterface
+  ) => {
+    if (event) {
+      event.preventDefault();
+    }
     try {
       const newBannerData = {
         id: product.recProductId,
@@ -21,13 +27,16 @@ const AddNewRecommendedBanner = () => {
         category: product.category,
         discountPercentage: product.discountPercentage,
         image: {
-          url: product.image.url,
+          url: product.image.medium,
           alt: product.image.alt,
         },
         createdAt: product.createdAt,
         author: product.author,
       };
-      const res = await axios.post(`${import.meta.env.BASE_URL}/api/banners`, newBannerData);
+      const res = await axios.post(
+        `${import.meta.env.BASE_URL}/api/banners`,
+        newBannerData
+      );
       if (res.status < 300 && res.status >= 200) {
         const createdBanner = res.data;
         console.log("Banner created:", createdBanner);
@@ -47,8 +56,8 @@ const AddNewRecommendedBanner = () => {
             <CardMedia
               component="img"
               sx={{ height: 140 }}
-              image= {product.image.url}
-              alt= {product.image.alt}
+              image={product.image.medium}
+              alt={product.image.alt}
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
@@ -64,7 +73,7 @@ const AddNewRecommendedBanner = () => {
                 price: ${product.salePrice}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-              discountPercentage: {product.discountPercentage}
+                discountPercentage: {product.discountPercentage}
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 quantity: {product.quantity}
@@ -72,13 +81,17 @@ const AddNewRecommendedBanner = () => {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button size="small" color="primary" onClick={ () => handleProductClick(product) } >
-              ADD New Banner
+            <Button
+              size="small"
+              color="primary"
+              onClick={() => handleProductClick(event, product)}
+            >
+              Add New Banner
             </Button>
           </CardActions>
         </Card>
       ))}
     </div>
   );
-}
+};
 export default AddNewRecommendedBanner;
