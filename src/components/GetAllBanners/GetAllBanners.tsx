@@ -11,7 +11,7 @@ export default function GetAllBanners() {
     const handelClickDelete = async (bannerId: string) => {
             try {
               await axios.delete(
-                `${import.meta.env.BASE_URL}/api/banners/:bannerId${bannerId}`
+                `${import.meta.env.BASE_URL}/api/banners/${bannerId}`
               );
               setAllBanners((prevBanners) =>
                 prevBanners.filter((banner) => banner._id !== bannerId)
