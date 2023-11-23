@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import counterReducer from './features/counter/counterReducer'
 import fromOpenReducer from './features/fromOpen/fromOpenReducer'
+import userReducer from './features/user/userReducer'
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
-    formOpen: fromOpenReducer
+    formOpen: fromOpenReducer,
+    user: userReducer
   },
 })
 
