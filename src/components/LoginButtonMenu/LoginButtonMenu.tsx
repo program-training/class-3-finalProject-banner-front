@@ -8,13 +8,14 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { Badge, IconButton } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
-import SignIn from '../Login/SignIn';
-import Register from '../Register/Register';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function LoginButtonMenu() {
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [isLoggedIn, setIsLoggedIn] = React.useState(false)
+    const navigate = useNavigate();
 
     const isMenuOpen = Boolean(anchorEl);
 
@@ -28,10 +29,11 @@ export default function LoginButtonMenu() {
 
     const handleLogIn = () => {
       setAnchorEl(null);
-
+      navigate('/login')
     }
-    const handleRegister = () => {
 
+    const handleRegister = () => {
+      navigate('/register')
     } 
 
     const handleLogHot = () => {
