@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { ProductInterface } from "./interfaces";
 
-export const useFetch = (url: string) => {
+export const useFetchRecBanners = (url: string) => {
   const [recommendedBanners, setRecommendedBanners] = useState<
     ProductInterface[]
   >([]);

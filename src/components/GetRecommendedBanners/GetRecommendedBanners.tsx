@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useFetch } from "../../utils/useFetchRecBanners";
+import {  useFetchRecBanners } from "../../utils/useFetchRecBanners";
 import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -9,7 +9,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 const GetRecommendedBanners = () => {
-  const { recommendedBanners, setRecommendedBanners } = useFetch(
+  const { recommendedBanners, setRecommendedBanners } = useFetchRecBanners(
+
     "/recommended/recProducts"
   );
 
