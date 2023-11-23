@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 
 const GetRecommendedBanners = () => {
   const { recommendedBanners, setRecommendedBanners } = useFetch(
-    "/api/recommended/recProducts"
+    "/recommended/recProducts"
   );
 
   const handleClick = async (bannerId: string) => {
@@ -33,11 +33,11 @@ const GetRecommendedBanners = () => {
     <div>
       {recommendedBanners.map((banner) => (
         <div key={banner.recProductId}>
-          <Link to={""} state={banner}>
+          <Link to={"/recBannerInfo"} state={banner}>
             <Card sx={{ maxWidth: 345 }}>
               <CardMedia
                 sx={{ height: 140 }}
-                image={banner.image.url}
+                image={banner.image.medium}
                 title={banner.image.alt}
               />
               <CardContent>
