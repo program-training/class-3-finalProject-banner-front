@@ -10,8 +10,8 @@ export const useFetchRecBanners = (url: string) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try { 
-        const res = await axios.get(`${import.meta.env.BASE_URL}${url}`);
+      try {
+        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}${url}`);
         if (res.status < 300 && res.status >= 200) {
           const data = res.data;
           setRecommendedBanners(data);

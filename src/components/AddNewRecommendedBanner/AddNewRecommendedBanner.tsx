@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useFetch } from "../../utils/useFetchRecBanners";
+import { useFetchRecBanners } from "../../utils/useFetchRecBanners";
 import { ProductInterface } from "../../utils/interfaces";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 
 const AddNewRecommendedBanner = () => {
-  const { products } = useFetch(`${import.meta.env.BASE_URL}/api/products`);
+  const { products } = useFetchRecBanners(`${import.meta.env.BASE_URL}/api/products`);
 
   const handleProductClick = async (product: ProductInterface) => {
     try {
