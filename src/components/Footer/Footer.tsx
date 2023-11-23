@@ -6,8 +6,8 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
      export default function Footer() {
        return (
-      <AppBar position="static" className={styles.footer}>
-        <Container sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+      <AppBar position="static" >
+        <Container sx={{display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <Toolbar>
             <Typography variant="body1" color="inherit">
               WWW.@banner.com

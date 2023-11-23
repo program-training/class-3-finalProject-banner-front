@@ -13,3 +13,16 @@ export interface ProductInterface {
   createdAt: Date;
   author: string;
 }
+
+export interface BannersInterFace {
+  _id: string
+  image: {
+    url: string
+    alt: string
+  }
+  text: string
+  userName: string
+  email: string
+  password: string
+  isAdmin: boolean
+}
