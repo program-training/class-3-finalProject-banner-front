@@ -18,14 +18,12 @@ export default function AnimatedPopup({children,}: AnimatedPopupProps): React.Re
   const [anchor, setAnchor] = React.useState<HTMLButtonElement | null>(null);
   const [open, setOpen] = React.useState(true);
 
-  const formOpen = useSelector((state: RootState) => state.formOpen.value);
-  const dispatchFromOpen = useDispatch();
 
   return (
     <div>
-      <Button ref={setAnchor} onClick={() => setOpen((o) => !o)} type="button">
+      {/* <Button ref={setAnchor} onClick={() => setOpen((o) => !o)} type="button">
         Show Login
-      </Button>
+      </Button> */}
       <BasePopup anchor={anchor} open={open} withTransition>
         {(props: PopupChildrenProps) => (
           <PopAnimation {...props}>
