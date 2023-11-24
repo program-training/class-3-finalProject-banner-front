@@ -9,16 +9,15 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 const GetRecommendedBanners = () => {
-  const { recommendedBanners, setRecommendedBanners } = useFetchRecBanners(
 
+  const { recommendedBanners, setRecommendedBanners } = useFetchRecBanners(
     "/recommended/recProducts"
   );
-
   const handleClick = async (bannerId: string) => {
     try {
       await axios.delete(
         `${
-          import.meta.env.VITE_BASE_URL
+          import.meta.env.VITE_BASE_URL_API_RENDER
         }/api/recommended/recProducts/${bannerId}`
       );
       setRecommendedBanners((prevBanners) =>
