@@ -6,12 +6,9 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 
 const AddNewRecommendedBanner = () => {
-  const { products } = useFetchRecBanners(
-    `${import.meta.env.VITE_BASE_URL_API_RENDER}/api/products`
-  );
+  const { products } = useFetchRecBanners("/api/recommended/allProducts");
 
   const handleProductClick = async (
     event: React.MouseEvent<HTMLButtonElement>,
@@ -22,7 +19,7 @@ const AddNewRecommendedBanner = () => {
     }
     try {
       const newBannerData = {
-        id: product.recProductId,
+        _id: product._id,
         name: product.name,
         salePrice: product.salePrice,
         quantity: product.quantity,
@@ -30,16 +27,21 @@ const AddNewRecommendedBanner = () => {
         category: product.category,
         discountPercentage: product.discountPercentage,
         image: {
-          url: product.image.medium,
+          large: product.image.large,
+          medium: product.image.medium,
+          small: product.image.small,
           alt: product.image.alt,
         },
-        createdAt: product.createdAt,
-        author: product.author,
+        createdAt: new Date(),
+        author: "ari",
       };
       const res = await axios.post(
-        `${import.meta.env.VITE_BASE_URL_API_RENDER}/api/recProduct`,
+        `${
+          import.meta.env.VITE_BASE_URL_API_RENDER
+        }/api/recommended/recProduct`,
         newBannerData
       );
+
       if (res.status < 300 && res.status >= 200) {
         const createdBanner = res.data;
         console.log("Banner created:", createdBanner);
@@ -54,7 +56,7 @@ const AddNewRecommendedBanner = () => {
   return (
     <div className="addNewBannerPage">
       {products.map((product) => (
-        <Card key={product.recProductId} sx={{ maxWidth: 345 }}>
+        <Card key={product._id} sx={{ maxWidth: 345 }}>
           <CardActionArea>
             <CardMedia
               component="img"
@@ -89,7 +91,6 @@ const AddNewRecommendedBanner = () => {
               color="primary"
               onClick={(event) => handleProductClick(event, product)}
             >
-              <AddIcon />
               Add New Banner
             </Button>
           </CardActions>

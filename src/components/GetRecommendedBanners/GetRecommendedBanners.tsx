@@ -1,5 +1,5 @@
 import axios from "axios";
-import {  useFetchRecBanners } from "../../utils/useFetchRecBanners";
+import { useFetchRecBanners } from "../../utils/useFetchRecBanners";
 import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -7,11 +7,10 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import AddNewRecommendedBanner from "../AddNewRecommendedBanner/AddNewRecommendedBanner";
 
 const GetRecommendedBanners = () => {
   const { recommendedBanners, setRecommendedBanners } = useFetchRecBanners(
-    "/recommended/recProducts"
+    "/api/recommended/recProducts"
   );
   const handleClick = async (bannerId: string) => {
     try {
@@ -21,7 +20,7 @@ const GetRecommendedBanners = () => {
         }/api/recommended/recProducts/${bannerId}`
       );
       setRecommendedBanners((prevBanners) =>
-        prevBanners.filter((banner) => banner.recProductId !== bannerId)
+        prevBanners.filter((banner) => banner._id !== bannerId)
       );
     } catch (err) {
       console.error(err);
@@ -32,7 +31,7 @@ const GetRecommendedBanners = () => {
   return (
     <div>
       {recommendedBanners.map((banner) => (
-        <div key={banner.recProductId}>
+        <div key={banner._id}>
           <Link to={"/recBannerInfo"} state={banner}>
             <Card sx={{ maxWidth: 345 }}>
               <CardMedia
@@ -58,10 +57,7 @@ const GetRecommendedBanners = () => {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button
-                  size="small"
-                  onClick={() => handleClick(banner.recProductId)}
-                >
+                <Button size="small" onClick={() => handleClick(banner._id)}>
                   Delete Banner
                 </Button>
               </CardActions>
@@ -69,7 +65,6 @@ const GetRecommendedBanners = () => {
           </Link>
         </div>
       ))}
-      <AddNewRecommendedBanner />
     </div>
   );
 };
