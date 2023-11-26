@@ -143,14 +143,14 @@ const PopupBody = styled("div")(
 `
 );
 
-const blue = {
-  200: "#99CCFF",
-  300: "#66B2FF",
-  400: "#3399FF",
-  500: "#007FFF",
-  600: "#0072E5",
-  700: "#0066CC",
-};
+// const blue = {
+//   200: "#99CCFF",
+//   300: "#66B2FF",
+//   400: "#3399FF",
+//   500: "#007FFF",
+//   600: "#0072E5",
+//   700: "#0066CC",
+// };
 
 // const Button = styled("button")(
 //   ({ theme }) => `
