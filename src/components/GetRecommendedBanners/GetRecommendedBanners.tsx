@@ -7,9 +7,9 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import AddNewRecommendedBanner from "../AddNewRecommendedBanner/AddNewRecommendedBanner";
 
 const GetRecommendedBanners = () => {
-
   const { recommendedBanners, setRecommendedBanners } = useFetchRecBanners(
     "/recommended/recProducts"
   );
@@ -69,6 +69,7 @@ const GetRecommendedBanners = () => {
           </Link>
         </div>
       ))}
+      <AddNewRecommendedBanner />
     </div>
   );
 };

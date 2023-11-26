@@ -15,6 +15,7 @@ export const useFetchRecBanners = (url: string) => {
         if (res.status < 300 && res.status >= 200) {
           const data = res.data;
           setRecommendedBanners(data);
+          setProducts(data);
         } else {
           console.log("error fetching data", res.status);
         }
