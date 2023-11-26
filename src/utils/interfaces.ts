@@ -1,5 +1,4 @@
 export interface ProductInterface {
-
   _id: string;
   name: string;
   salePrice: number;

@@ -1,6 +1,6 @@
 import './GetRecommendedBanners.css';
 import axios from "axios";
-import {  useFetchRecBanners } from "../../utils/useFetchRecBanners";
+import { useFetchRecBanners } from "../../utils/useFetchRecBanners";
 import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -12,7 +12,6 @@ import { IconButton } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 
 const GetRecommendedBanners = () => {
-
   const { recommendedBanners, setRecommendedBanners } = useFetchRecBanners(
     "/api/recommended/recProducts"
   );
@@ -50,6 +49,7 @@ const GetRecommendedBanners = () => {
         <div key={banner._id}>
           <Link to={`/recBannerInfo/${banner._id}`} state={banner}>
           <Card sx={{ maxWidth: 345, margin: '15px', borderRadius: '20px', boxShadow: '0 0 10px gray' }}>
+
               <CardMedia
                 sx={{ height: 150 }}
                 image={banner.image.medium}
@@ -81,6 +81,7 @@ const GetRecommendedBanners = () => {
                 <DeleteIcon />
                 <ToastContainer />
                 </IconButton>
+
               </CardActions>
             </Card>
           </Link>

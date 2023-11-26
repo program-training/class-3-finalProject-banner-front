@@ -7,8 +7,6 @@ import {
   PopupChildrenProps,
 } from "@mui/base/Unstable_Popup";
 import CloseIcon from '@mui/icons-material/Close';
-// import { useDispatch, useSelector } from "react-redux";
-// import { RootState } from "../../redux/store";
 
 interface AnimatedPopupProps {
   children: React.ReactNode;

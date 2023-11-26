@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import GetRecommendedBanners from "../GetRecommendedBanners/GetRecommendedBanners";
+import AddButton from "../AddButton/AddButton";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -16,8 +17,9 @@ export default function Home() {
 
   return (
     <div className={styles.context}>
-      <h1>Home</h1>
-      <GetRecommendedBanners />
+        <h1>Home</h1>
+        <GetRecommendedBanners />
+        <AddButton />
     </div>
   );
 }

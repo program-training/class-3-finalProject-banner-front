@@ -6,8 +6,8 @@ import BaseLayout from "./components/BaseLayout/BaseLayout";
 import Home from "./components/Home/Home";
 import SignIn from "./components/SignIn/SignIn";
 import SignUp from "./components/SignUp/SignUp";
+import AddNewRecommendedBanner from "./components/AddNewRecommendedBanner/AddNewRecommendedBanner";
 import GetRecBannersInfo from "./components/GetRecBannersInfo/GetRecBannersInfo";
-
 function App() {
   return (
     <>
@@ -17,6 +17,7 @@ function App() {
           <Route element={<BaseLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/recBannerInfo/:id" element={<GetRecBannersInfo />} />
+            <Route path="/addNewRec" element={<AddNewRecommendedBanner />} />
             <Route path="/login" element={<SignIn />} />
             <Route path="/register" element={<SignUp />} />
             <Route path="/HelloWorld" element={<HelloWorld />} />

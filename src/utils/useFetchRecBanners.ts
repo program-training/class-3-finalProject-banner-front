@@ -18,6 +18,7 @@ export const useFetchRecBanners = (url: string) => {
           const data = res.data;
           setRecommendedBanners(data);
           setRecBannerById(data);
+          setProducts(data);
         } else {
           console.log("error fetching data", res.status);
         }
