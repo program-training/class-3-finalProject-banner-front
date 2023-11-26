@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 export default function LoginButtonMenu() {
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const [isLoggedIn, setIsLoggedIn] = React.useState(false)
+    const [isLoggedIn] = React.useState(false)
     const navigate = useNavigate();
 
     const isMenuOpen = Boolean(anchorEl);

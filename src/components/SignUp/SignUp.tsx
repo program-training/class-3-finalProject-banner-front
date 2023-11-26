@@ -13,7 +13,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Checkbox, FormControlLabel } from '@mui/material';
 import { UserReg } from '../../interfaces/User';
 import { userLogin, userRegister } from '../../api/usersApi';
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';

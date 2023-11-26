@@ -10,7 +10,6 @@ import HomeIconButton from '../HomeIconButton/HomeIconButton';
 
 export default function HeaderMenuItem() {
 
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
 
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -23,11 +22,6 @@ export default function HeaderMenuItem() {
         setMobileMoreAnchorEl(event.currentTarget);
       };
     
-      
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
     const mobileMenuId = 'primary-search-account-menu-mobile';
     const renderMobileMenu = (
       <Menu
@@ -53,7 +47,7 @@ export default function HeaderMenuItem() {
             </IconButton>
           <p>Home</p>
         </MenuItem>
-        <MenuItem onClick={handleProfileMenuOpen}>
+        <MenuItem >
           <IconButton
             size="large"
             aria-label="account of current user"

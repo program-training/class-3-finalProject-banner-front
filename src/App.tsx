@@ -16,7 +16,7 @@ function App() {
         <Routes>
           <Route element={<BaseLayout />}>
             <Route path="/" element={<Home />} />
-            <Route path="/recBannerInfo" element={<GetRecBannersInfo />} />
+            <Route path="/recBannerInfo/:id" element={<GetRecBannersInfo />} />
             <Route path="/login" element={<SignIn />} />
             <Route path="/register" element={<SignUp />} />
             <Route path="/HelloWorld" element={<HelloWorld />} />

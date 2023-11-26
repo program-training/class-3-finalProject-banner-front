@@ -8,17 +8,14 @@ import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 
 const AddNewRecommendedBanner = () => {
-  const { products } = useFetchRecBanners(`${import.meta.env.VITE_BASE_URL_API_RENDER}/api/products`);
+  const { products } = useFetchRecBanners(`${import.meta.env.VITE_BASE_URL_API_RENDER}/api/recommended/products`);
 
   const handleProductClick = async (
     product: ProductInterface
   ) => {
-    if (event) {
-      event.preventDefault();
-    }
     try {
       const newBannerData = {
-        id: product.recProductId,
+        id: product._id,
         name: product.name,
         salePrice: product.salePrice,
         quantity: product.quantity,
@@ -33,7 +30,7 @@ const AddNewRecommendedBanner = () => {
         author: product.author,
       };
       const res = await axios.post(
-        `${import.meta.env.BASE_URL}/api/banners`,
+        `${import.meta.env.VITE_BASE_URL_API_RENDER}/api/banners`,
         newBannerData
       );
       if (res.status < 300 && res.status >= 200) {
@@ -50,7 +47,7 @@ const AddNewRecommendedBanner = () => {
   return (
     <div className="addNewBannerPage">
       {products.map((product) => (
-        <Card key={product.recProductId} sx={{ maxWidth: 345 }}>
+        <Card key={product._id} sx={{ maxWidth: 345 }}>
           <CardActionArea>
             <CardMedia
               component="img"

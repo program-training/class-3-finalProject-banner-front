@@ -1,4 +1,3 @@
-import styles from './MenuButtonAccount.module.css';
 import * as React from 'react';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import Menu from '@mui/material/Menu';
@@ -12,7 +11,7 @@ import Box from '@mui/material/Box';
 export default function MenuButtonAccount() {
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const [isLoggedIn, setIsLoggedIn] = React.useState(false)
+    const [isLoggedIn] = React.useState(false)
 
     const isMenuOpen = Boolean(anchorEl);
 

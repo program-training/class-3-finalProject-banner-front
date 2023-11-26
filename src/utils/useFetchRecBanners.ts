@@ -8,6 +8,8 @@ export const useFetchRecBanners = (url: string) => {
   >([]);
   const [products, setProducts] = useState<ProductInterface[]>([]);
 
+  const [recBannerById, setRecBannerById] = useState<ProductInterface>()
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -15,6 +17,7 @@ export const useFetchRecBanners = (url: string) => {
         if (res.status < 300 && res.status >= 200) {
           const data = res.data;
           setRecommendedBanners(data);
+          setRecBannerById(data);
         } else {
           console.log("error fetching data", res.status);
         }
@@ -26,5 +29,5 @@ export const useFetchRecBanners = (url: string) => {
     fetchData();
   }, []);
 
-  return { recommendedBanners, setRecommendedBanners, products, setProducts };
+  return { recommendedBanners, setRecommendedBanners, products, setProducts, recBannerById, setRecBannerById};
 };
