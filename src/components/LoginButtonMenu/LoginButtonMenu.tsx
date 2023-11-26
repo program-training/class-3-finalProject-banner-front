@@ -15,6 +15,7 @@ export default function LoginButtonMenu() {
 
   const isMenuOpen = Boolean(anchorEl);
 
+
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
