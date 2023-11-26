@@ -1,4 +1,3 @@
-import styles from './Footer.module.css';
 import { AppBar, Toolbar, Typography, Container } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import FacebookIcon from '@mui/icons-material/Facebook';

@@ -21,7 +21,7 @@ const GetRecBannersInfo = (banner: ProductInterface) => {
             {banner.description}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {banner.recProductId}
+            {banner._id}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {banner.salePrice}

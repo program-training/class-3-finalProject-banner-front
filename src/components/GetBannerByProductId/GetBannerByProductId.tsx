@@ -1,7 +1,7 @@
-import { useFetchBanner } from "../../utils/useFetchBanners";
+// import { useFetchBanner } from "../../utils/useFetchBanners";
 
 const GetBannerByProductId = () => {
-  const { allBanners } = useFetchBanner("/api/banners/");
+  // const { allBanners } = useFetchBanner("/api/banners/");
 
   return <div></div>;
 };

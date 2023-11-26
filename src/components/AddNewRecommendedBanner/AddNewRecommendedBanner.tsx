@@ -5,12 +5,15 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Button, CardActionArea, CardActions } from "@mui/material";
-
+import { CardActionArea, CardActions } from "@mui/material";
+import { toast, ToastContainer } from "react-toastify";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import "./AddNewRecommendedBanner.css";
 const AddNewRecommendedBanner = () => {
-  const { products } = useFetchRecBanners(`${import.meta.env.VITE_BASE_URL_API_RENDER}/api/products`);
+  const { products } = useFetchRecBanners("/api/recommended/allProducts");
 
   const handleProductClick = async (
+    event: React.MouseEvent<SVGSVGElement>,
     product: ProductInterface
   ) => {
     if (event) {
@@ -18,7 +21,7 @@ const AddNewRecommendedBanner = () => {
     }
     try {
       const newBannerData = {
-        id: product.recProductId,
+        _id: product._id,
         name: product.name,
         salePrice: product.salePrice,
         quantity: product.quantity,
@@ -26,21 +29,28 @@ const AddNewRecommendedBanner = () => {
         category: product.category,
         discountPercentage: product.discountPercentage,
         image: {
-          url: product.image.medium,
+          large: product.image.large,
+          medium: product.image.medium,
+          small: product.image.small,
           alt: product.image.alt,
         },
-        createdAt: product.createdAt,
-        author: product.author,
+        createdAt: new Date(),
+        author: "ari",
       };
       const res = await axios.post(
-        `${import.meta.env.BASE_URL}/api/banners`,
+        `${
+          import.meta.env.VITE_BASE_URL_API_RENDER
+        }/api/recommended/recProduct`,
         newBannerData
       );
+
       if (res.status < 300 && res.status >= 200) {
         const createdBanner = res.data;
         console.log("Banner created:", createdBanner);
+        toast.success("Banner created successfully!");
       } else {
         console.log("Error creating banner", res.status);
+        toast.error("Failed to create the rec banner.");
       }
     } catch (err) {
       console.error(err);
@@ -50,7 +60,7 @@ const AddNewRecommendedBanner = () => {
   return (
     <div className="addNewBannerPage">
       {products.map((product) => (
-        <Card key={product.recProductId} sx={{ maxWidth: 345 }}>
+        <Card key={product._id} sx={{ maxWidth: 345 }}>
           <CardActionArea>
             <CardMedia
               component="img"
@@ -80,13 +90,12 @@ const AddNewRecommendedBanner = () => {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button
-              size="small"
+            <AddCircleIcon
               color="primary"
-              onClick={() => handleProductClick(product)}
+              onClick={(event) => handleProductClick(event, product)}
             >
-              Add New Banner
-            </Button>
+              <ToastContainer />
+            </AddCircleIcon>
           </CardActions>
         </Card>
       ))}
