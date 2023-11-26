@@ -2,7 +2,7 @@ name: ESLint Check
 
 on:
   pull_request:
-    branches: [ development ]
+    branches: [ development, main ]
     paths:
       - '**/*.ts'
       - '**/*.tsx'
