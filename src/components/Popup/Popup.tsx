@@ -1,34 +1,36 @@
 // import styles from './Popup.module.css';
-
-import * as React from 'react';
-import { styled, Theme } from '@mui/system';
-import { Unstable_Popup as BasePopup,  PopupChildrenProps,} from '@mui/base/Unstable_Popup';
+import * as React from "react";
+import { styled, Theme } from "@mui/system";
+import {
+  Unstable_Popup as BasePopup,
+  PopupChildrenProps,
+} from "@mui/base/Unstable_Popup";
 
 interface AnimatedPopupProps {
-    children: React.ReactNode;
-  }
-  
-  export default function AnimatedPopup({ children }: AnimatedPopupProps): React.ReactElement {
-    const [anchor, setAnchor] = React.useState<HTMLButtonElement | null>(null);
-    const [open, setOpen] = React.useState(false);
-  
-    return (
-      <div>
-        <Button ref={setAnchor} onClick={() => setOpen((o) => !o)} type="button">
-          Show Login
-        </Button>
-        <BasePopup anchor={anchor} open={open} withTransition>
-          {(props: PopupChildrenProps) => (
-            <PopAnimation {...props}>
-                <PopupBody>
-                    {children}
-                </PopupBody>
-            </PopAnimation>
-          )}
-        </BasePopup>
-      </div>
-    );
-  }
+  children: React.ReactNode;
+}
+
+export default function AnimatedPopup({
+  children,
+}: AnimatedPopupProps): React.ReactElement {
+  const [anchor, setAnchor] = React.useState<HTMLButtonElement | null>(null);
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <div>
+      <Button ref={setAnchor} onClick={() => setOpen((o) => !o)} type="button">
+        Show Login
+      </Button>
+      <BasePopup anchor={anchor} open={open} withTransition>
+        {(props: PopupChildrenProps) => (
+          <PopAnimation {...props}>
+            <PopupBody>{children}</PopupBody>
+          </PopAnimation>
+        )}
+      </BasePopup>
+    </div>
+  );
+}
 
 function Animated(
   props: React.PropsWithChildren<{
@@ -36,7 +38,7 @@ function Animated(
     requestOpen: boolean;
     onEnter: () => void;
     onExited: () => void;
-  }>,
+  }>
 ) {
   const { requestOpen, onEnter, onExited, children, className } = props;
 
@@ -55,7 +57,7 @@ function Animated(
   return (
     <div
       onAnimationEnd={handleAnimationEnd}
-      className={className + (requestOpen ? ' open' : ' close')}
+      className={className + (requestOpen ? " open" : " close")}
     >
       {children}
     </div>
@@ -107,42 +109,42 @@ const PopAnimation = styled(Animated)`
 `;
 
 const grey = {
-  50: '#f6f8fa',
-  200: '#d0d7de',
-  500: '#6e7781',
-  700: '#424a53',
-  900: '#24292f',
+  50: "#f6f8fa",
+  200: "#d0d7de",
+  500: "#6e7781",
+  700: "#424a53",
+  900: "#24292f",
 };
 
-const PopupBody = styled('div')(
+const PopupBody = styled("div")(
   ({ theme }: { theme: Theme }) => `
     width: max-content;
     padding: 0.5rem 1rem;
     margin: 8px;
-    border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
-    background-color: ${theme.palette.mode === 'dark' ? grey[900] : '#FFF'};
+    border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
+    background-color: ${theme.palette.mode === "dark" ? grey[900] : "#FFF"};
     border-radius: 8px;
     box-shadow: ${
-      theme.palette.mode === 'dark'
+      theme.palette.mode === "dark"
         ? `0px 4px 8px rgb(0 0 0 / 0.7)`
         : `0px 4px 8px rgb(0 0 0 / 0.1)`
     };
     min-height: 3rem;
     display: flex;
     align-items: center;
-`,
+`
 );
 
 const blue = {
-  200: '#99CCFF',
-  300: '#66B2FF',
-  400: '#3399FF',
-  500: '#007FFF',
-  600: '#0072E5',
-  700: '#0066CC',
+  200: "#99CCFF",
+  300: "#66B2FF",
+  400: "#3399FF",
+  500: "#007FFF",
+  600: "#0072E5",
+  700: "#0066CC",
 };
 
-const Button = styled('button')(
+const Button = styled("button")(
   ({ theme }) => `
   font-family: IBM Plex Sans, sans-serif;
   font-weight: 600;
@@ -156,7 +158,9 @@ const Button = styled('button')(
   cursor: pointer;
   border: 1px solid ${blue[500]};
   box-shadow: 0 2px 1px ${
-    theme.palette.mode === 'dark' ? 'rgba(0, 0, 0, 0.5)' : 'rgba(45, 45, 60, 0.2)'
+    theme.palette.mode === "dark"
+      ? "rgba(0, 0, 0, 0.5)"
+      : "rgba(45, 45, 60, 0.2)"
   }, inset 0 1.5px 1px ${blue[400]}, inset 0 -2px 1px ${blue[600]};
 
   &:hover {
@@ -169,7 +173,9 @@ const Button = styled('button')(
   }
 
   &:focus-visible {
-    box-shadow: 0 0 0 4px ${theme.palette.mode === 'dark' ? blue[300] : blue[200]};
+    box-shadow: 0 0 0 4px ${
+      theme.palette.mode === "dark" ? blue[300] : blue[200]
+    };
     outline: none;
   }
 
@@ -181,5 +187,5 @@ const Button = styled('button')(
       background-color: ${blue[500]};
     }
   }
-`,
+`
 );
