@@ -5,13 +5,15 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Button, CardActionArea, CardActions } from "@mui/material";
-
+import { CardActionArea, CardActions } from "@mui/material";
+import { toast, ToastContainer } from "react-toastify";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import "./AddNewRecommendedBanner.css";
 const AddNewRecommendedBanner = () => {
   const { products } = useFetchRecBanners("/api/recommended/allProducts");
 
   const handleProductClick = async (
-    event: React.MouseEvent<HTMLButtonElement>,
+    event: React.MouseEvent<SVGSVGElement>,
     product: ProductInterface
   ) => {
     if (event) {
@@ -45,8 +47,10 @@ const AddNewRecommendedBanner = () => {
       if (res.status < 300 && res.status >= 200) {
         const createdBanner = res.data;
         console.log("Banner created:", createdBanner);
+        toast.success("Banner created successfully!");
       } else {
         console.log("Error creating banner", res.status);
+        toast.error("Failed to create the rec banner.");
       }
     } catch (err) {
       console.error(err);
@@ -86,13 +90,12 @@ const AddNewRecommendedBanner = () => {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button
-              size="small"
+            <AddCircleIcon
               color="primary"
               onClick={(event) => handleProductClick(event, product)}
             >
-              Add New Banner
-            </Button>
+              <ToastContainer />
+            </AddCircleIcon>
           </CardActions>
         </Card>
       ))}
