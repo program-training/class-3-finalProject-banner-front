@@ -2,12 +2,12 @@ ame: ESLint Check
 
 on:
   pull_request:
-    branches: [ develop ]
+    branches: [ development ]
     paths:
       - '**/*.ts'
       - '**/*.tsx'
       - '.github/workflows/eslint-check.yml'
-
+ 
 jobs:
   build:
     runs-on: ubuntu-latest
