@@ -17,6 +17,7 @@ const AddNewRecommendedBanner = () => {
     event: React.MouseEvent<SVGSVGElement>,
     product: ProductInterface
   ) => {
+    console.log(event)
     try {
       const newBannerData = {
         _id: product._id,
