@@ -11,10 +11,6 @@ export default function Header() {
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
 
-  const conected = () => {
-    
-  }
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
