@@ -31,7 +31,9 @@ export default function GetAllBanners() {
     }
   };
 
-  const handleEditClick = async (bannerId: string) => {};
+  const handleEditClick = async (bannerId: string) => {
+    console.log(bannerId);
+  };
 
   return (
     <div>
