@@ -18,13 +18,13 @@ export interface ProductInterface {
 
 export interface BannersInterFace {
   _id: string;
+  category: string;
   image: {
-    url: string;
+    medium: string;
     alt: string;
   };
+  title: string;
   text: string;
-  userName: string;
-  email: string;
-  password: string;
-  isAdmin: boolean;
+  createdAt: Date;
+  author: string;
 }

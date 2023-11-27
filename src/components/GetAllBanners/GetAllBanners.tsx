@@ -31,7 +31,7 @@ export default function GetAllBanners() {
     }
   };
 
-  const handleEditClick = async () => {};
+  const handleEditClick = async (bannerId: string) => {};
 
   return (
     <div>
@@ -43,7 +43,7 @@ export default function GetAllBanners() {
                 <CardMedia
                   component="img"
                   sx={{ height: 140 }}
-                  image={banner.image.url}
+                  image={banner.image.medium}
                   alt={banner.image.alt}
                 />
                 <CardContent>
@@ -52,14 +52,21 @@ export default function GetAllBanners() {
                     color="text.secondary"
                     component="h1"
                   >
-                    {banner.text}
+                    {banner.title}
                   </Typography>
                   <Typography
                     variant="body2"
                     color="text.secondary"
                     component="p"
                   >
-                    {banner.userName}
+                    {banner.createdAt.toString()}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    component="p"
+                  >
+                    {banner.author}
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -67,7 +74,7 @@ export default function GetAllBanners() {
                 <IconButton onClick={() => handelDeleteClick(banner._id)}>
                   <DeleteIcon />
                 </IconButton>
-                <IconButton onClick={handleEditClick}>
+                <IconButton onClick={() => handleEditClick(banner._id)}>
                   <EditIcon />
                 </IconButton>
               </CardActions>
