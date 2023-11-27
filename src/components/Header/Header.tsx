@@ -8,6 +8,7 @@ import HomeIconButton from '../HomeIconButton/HomeIconButton';
 import MenuButtonAccount from '../MenuButtonAccount/MenuButtonAccount';
 
 export default function Header() {
+
   const mobileMenuId = 'primary-search-account-menu-mobile';
 
   return (

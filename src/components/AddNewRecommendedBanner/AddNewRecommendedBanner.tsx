@@ -10,15 +10,14 @@ import { toast, ToastContainer } from "react-toastify";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import "./AddNewRecommendedBanner.css";
 const AddNewRecommendedBanner = () => {
+
   const { products } = useFetchRecBanners("/api/recommended/allProducts");
 
   const handleProductClick = async (
     event: React.MouseEvent<SVGSVGElement>,
     product: ProductInterface
   ) => {
-    if (event) {
-      event.preventDefault();
-    }
+    console.log(event)
     try {
       const newBannerData = {
         _id: product._id,
