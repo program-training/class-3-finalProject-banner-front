@@ -6,8 +6,10 @@ import BaseLayout from "./components/BaseLayout/BaseLayout";
 import Home from "./components/Home/Home";
 import SignIn from "./components/SignIn/SignIn";
 import SignUp from "./components/SignUp/SignUp";
-import AddNewRecommendedBanner from "./components/AddNewRecommendedBanner/AddNewRecommendedBanner";
-import GetRecBannersInfo from "./components/GetRecBannersInfo/GetRecBannersInfo";
+import AddNewRecommendedBanner from "./components/RecomendedBanners/AddNewRecommendedBanner/AddNewRecommendedBanner";
+import GetRecBannersInfo from "./components/RecomendedBanners/GetRecBannersInfo/GetRecBannersInfo";
+import HomeRecommended from "./components/RecomendedBanners/HomeRecommended/HomeRecommended";
+import HomeBanners from "./components/Banners/HomeBanners/HomeBanners";
 function App() {
   return (
     <>
@@ -16,6 +18,8 @@ function App() {
         <Routes>
           <Route element={<BaseLayout />}>
             <Route path="/" element={<Home />} />
+            <Route path="/homeRecommended" element={<HomeRecommended />} />
+            <Route path="/homeBanners" element={<HomeBanners />} />
             <Route path="/recBannerInfo/:id" element={<GetRecBannersInfo />} />
             <Route path="/addNewRec" element={<AddNewRecommendedBanner />} />
             <Route path="/login" element={<SignIn />} />

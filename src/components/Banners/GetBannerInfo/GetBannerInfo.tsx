@@ -1,4 +1,4 @@
-import { BannersInterFace } from "../../utils/interfaces";
+import { BannersInterFace } from "../../../utils/interfaces";
 import Box from "@mui/material/Box";
 import {
   Card,

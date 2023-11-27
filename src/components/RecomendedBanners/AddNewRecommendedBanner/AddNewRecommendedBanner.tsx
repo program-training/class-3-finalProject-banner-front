@@ -1,11 +1,11 @@
 import axios from "axios";
-import { useFetchRecBanners } from "../../utils/useFetchRecBanners";
-import { ProductInterface } from "../../utils/interfaces";
+import { useFetchRecBanners } from "../../../utils/useFetchRecBanners";
+import { ProductInterface } from "../../../utils/interfaces";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, CardActions } from "@mui/material";
+import { CardActionArea, CardActions, IconButton } from "@mui/material";
 import { toast, ToastContainer } from "react-toastify";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import "./AddNewRecommendedBanner.css";
@@ -14,10 +14,8 @@ const AddNewRecommendedBanner = () => {
   const { products } = useFetchRecBanners("/api/recommended/allProducts");
 
   const handleProductClick = async (
-    event: React.MouseEvent<SVGSVGElement>,
     product: ProductInterface
   ) => {
-    console.log(event)
     try {
       const newBannerData = {
         _id: product._id,
@@ -59,7 +57,7 @@ const AddNewRecommendedBanner = () => {
   return (
     <div className="addNewBannerPage">
       {products.map((product) => (
-        <Card key={product._id} sx={{ maxWidth: 345 }}>
+        <Card key={product._id} sx={{maxWidth: 345, margin: '15px', borderRadius: '20px', boxShadow: '0 0 10px gray'}}>
           <CardActionArea>
             <CardMedia
               component="img"
@@ -88,13 +86,14 @@ const AddNewRecommendedBanner = () => {
               </Typography>
             </CardContent>
           </CardActionArea>
-          <CardActions>
-            <AddCircleIcon
-              color="primary"
-              onClick={(event) => handleProductClick(event, product)}
-            >
+          <CardActions sx={{display:'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <IconButton>
+              <AddCircleIcon
+                color="primary"
+                onClick={() => handleProductClick(product)}
+              />
+            </IconButton>
               <ToastContainer />
-            </AddCircleIcon>
           </CardActions>
         </Card>
       ))}

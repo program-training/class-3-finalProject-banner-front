@@ -1,4 +1,4 @@
-import { useFetchBanner } from "../../utils/useFetchBanners";
+import { useFetchBanner } from "../../../utils/useFetchBanners";
 import Box from "@mui/material/Box";
 import {
   Card,

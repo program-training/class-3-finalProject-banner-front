@@ -1,0 +1,29 @@
+
+.addButton {
+    top: 30vh;
+    float: right;
+    right: 0vh;
+    cursor: pointer;
+    position: fixed;
+    padding-top: 10px;
+    margin-left: -3px;
+    padding-right: 10px;
+    margin-bottom: 592px; 
+    margin-left: 30px;
+    padding-left: 5px;
+    padding-bottom: 10px;
+    background-color: #fdd90f;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.cardsRec {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+    margin-top: 60px ;
+    margin: 20px;
+}
