@@ -3,9 +3,9 @@ import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import GetRecommendedBanners from "../GetRecommendedBanners/GetRecommendedBanners";
-import AddButton from "../AddButton/AddButton";
-
+import RecommendedBox from "../RecomendedBanners/RecommendedBox/RecommendedBox";
+import BannersBox from "../Banners/BannersBox/BannersBox";
+import './Home.module.css'
 export default function Home() {
   const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.user.user);
@@ -16,10 +16,9 @@ export default function Home() {
   }, [navigate, user?.isConnected]);
 
   return (
-    <div className={styles.context}>
-        <h1>Home</h1>
-        <GetRecommendedBanners />
-        <AddButton />
+    <div className={styles.homeContainer}>
+      <RecommendedBox />
+      <BannersBox />
     </div>
   );
 }

@@ -3,13 +3,12 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { useFetchRecBanners } from "../../utils/useFetchRecBanners";
+import { useFetchRecBanners } from "../../../utils/useFetchRecBanners";
 import { useParams, useNavigate } from "react-router-dom";
 import { IconButton } from '@mui/material';
 import Delete from '@mui/icons-material/Delete';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-
 
 const GetRecBannersInfo = () => {
   const params = useParams();
@@ -46,11 +45,12 @@ const GetRecBannersInfo = () => {
     }
   }
 
+
   return (
     <div className="cardRecPage">
       <Card sx={{ width: 800, height: 400 , border: '2px solid black', display: 'flex', flexDirection: 'row', boxShadow: '0 0 10px gray'}}>
         <CardMedia
-          sx={{ height: 400 , width: 400, backgroundColor: '#d4d6c3'}}
+          sx={{ height: 400, width: 400, backgroundColor: '#d4d6c3'}}
           image={recBannerById?.image.medium}
           title={recBannerById?.image.alt}
         />
@@ -60,28 +60,25 @@ const GetRecBannersInfo = () => {
             <hr />
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {recBannerById?.description}
+            description: {recBannerById?.description}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {recBannerById?._id}
+            price: {recBannerById?.salePrice}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {recBannerById?.salePrice}
+            quantity: {recBannerById?.quantity}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {recBannerById?.quantity}
+            category: {recBannerById?.category}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {recBannerById?.category}
+             discountPercentage: {recBannerById?.discountPercentage}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {recBannerById?.discountPercentage}
+            created by: {recBannerById?.author}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {recBannerById?.createdAt.toLocaleString()}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {recBannerById?.author}
+            at: {recBannerById?.createdAt.toLocaleString()}
           </Typography>
           <IconButton onClick={handleClick} color= 'error' size='large'>
               <Delete fontSize='inherit'/>

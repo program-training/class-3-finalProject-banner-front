@@ -1,4 +1,4 @@
-import { useFetchBanner } from "../../utils/useFetchBanners";
+import { useFetchBanner } from "../../../utils/useFetchBanners";
 import Box from "@mui/material/Box";
 import {
   Card,
@@ -16,14 +16,12 @@ import { Link } from "react-router-dom";
 
 export default function GetAllBanners() {
   const { allBanners, setAllBanners } = useFetchBanner(
-    `${import.meta.env.VITE_BASE_URL_API_RENDER}/api/banners`
+    `${import.meta.env.BASE_URL}/api/banners`
   );
 
   const handelDeleteClick = async (bannerId: string) => {
     try {
-      await axios.delete(
-        `${import.meta.env.VITE_BASE_URL_API_RENDER}/api/banners/${bannerId}`
-      );
+      await axios.delete(`${import.meta.env.BASE_URL}/api/banners/${bannerId}`);
       setAllBanners((prevBanners) =>
         prevBanners.filter((banner) => banner._id !== bannerId)
       );
@@ -33,9 +31,7 @@ export default function GetAllBanners() {
     }
   };
 
-  const handleEditClick = async (bannerId: string) => {
-    console.log(bannerId);
-  };
+  const handleEditClick = async (bannerId: string) => {};
 
   return (
     <div>
