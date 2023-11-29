@@ -55,6 +55,7 @@ export default function GetAllBanners() {
   const handleClickOpen = (bannerId: string) => {
     setOpen(true)
     setSelectedBannerId(bannerId)
+  }
 
   const handleClickPrevent = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -85,10 +86,11 @@ export default function GetAllBanners() {
                   <Typography
                     variant="body2"
                     color="text.secondary"
-                    component="p"
+                    component="div"
                   >
-                    {banner.createdAt.toString()}
+                    {banner.createdAt && banner.createdAt.toString()}
                   </Typography>
+
                   <Typography
                     variant="body2"
                     color="text.secondary"
@@ -132,4 +134,4 @@ export default function GetAllBanners() {
     </div>
   );
 }
-}
+
