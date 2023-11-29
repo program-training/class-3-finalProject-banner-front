@@ -7,7 +7,11 @@ pipeline {
                 checkout scm
             }
         }
-
+        stage('Clean npm Cache') {
+            steps {
+        sh 'npm cache clean --force'
+    }
+}
         stage('Install Dependencies') {
             steps {
                 script {
