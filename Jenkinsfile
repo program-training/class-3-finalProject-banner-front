@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     echo 'Testing frontend...'
-                    sh 'npm run test'
+                    sh 'npm test'
                 }
             }
         }
