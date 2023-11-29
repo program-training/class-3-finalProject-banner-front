@@ -13,6 +13,9 @@ import { useFetchBanners } from "../../../utils/useFetchBanners";
 import { SelectChangeEvent } from "@mui/material";
 import { SubmitHandler } from "react-hook-form";
 import { CategoryInterface } from "../../../utils/interfaces";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { ErrorMessage } from "@hookform/error-message";
 
 type FormData = {
   url: string;
@@ -53,8 +56,15 @@ const AddNewBanner = () => {
     setSelectedImage(event.target.files ? event.target.files[0] : null);
   };
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
     console.log("Form data:", data);
+    try {
+      await axios.post(`${import.meta.env.BASE_URL}/api/banners/banner`, data);
+      toast.success("Form submitted successfully!");
+    } catch (error) {
+      console.error(error);
+      toast.error("Error submitting the form. Please try again.");
+    }
   };
 
   const handleCategoryChange = (event: SelectChangeEvent<unknown>) => {
@@ -83,6 +93,7 @@ const AddNewBanner = () => {
             label="URL"
           />
         </FormControl>
+        <ErrorMessage errors={errors} name="url" />
 
         <FormControl sx={{ marginBottom: "16px" }}>
           <TextField
@@ -92,6 +103,7 @@ const AddNewBanner = () => {
             onChange={(event) => handleInputChange("title", event.target.value)}
           />
         </FormControl>
+        <ErrorMessage errors={errors} name="title" />
 
         <FormControl sx={{ marginBottom: "16px" }}>
           <TextField
@@ -101,10 +113,19 @@ const AddNewBanner = () => {
             onChange={(event) => handleInputChange("text", event.target.value)}
           />
         </FormControl>
+        <ErrorMessage errors={errors} name="text" />
 
         <FormControl sx={{ marginBottom: "16px" }}>
           <input name="file" type="file" onChange={handleImageChange} />
+          {selectedImage && (
+            <img
+              src={URL.createObjectURL(selectedImage)}
+              alt="Selected Image"
+              style={{ width: "500px", height: "300px", marginTop: "10px" }}
+            />
+          )}
         </FormControl>
+        <ErrorMessage errors={errors} name="image" />
 
         <FormControl sx={{ marginBottom: "16px" }}>
           <Select
@@ -120,6 +141,7 @@ const AddNewBanner = () => {
             ))}
           </Select>
         </FormControl>
+        <ErrorMessage errors={errors} name="Category" />
 
         <Button type="submit" variant="contained" color="primary">
           Submit
