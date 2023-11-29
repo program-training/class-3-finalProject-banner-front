@@ -28,7 +28,14 @@ export const useFetchRecBanners = (url: string) => {
       }
     };
     fetchData();
-  }, []);
+  }, [url]);
 
-  return { recommendedBanners, setRecommendedBanners, products, setProducts, recBannerById, setRecBannerById};
+  return {
+    recommendedBanners,
+    setRecommendedBanners,
+    products,
+    setProducts,
+    recBannerById,
+    setRecBannerById,
+  };
 };

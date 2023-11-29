@@ -25,7 +25,7 @@ export const useFetchBanners = (url: string) => {
       }
     };
     fetchBanners();
-  }, []);
+  }, [url]);
 
   return {
     allBanners,
