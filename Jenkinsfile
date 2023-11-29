@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     echo 'Installing dependencies...'
-                    sh 'cd class-3-finalProject-banner-front && npm install'
+                    sh 'npm install'
                 }
             }
         }
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     echo 'Testing frontend...'
-                    sh 'cd class-3-finalProject-banner-front && npm run test'
+                    sh 'npm run test'
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     echo 'Building frontend...'
-                    sh 'cd class-3-finalProject-banner-front && npm run build'
+                    sh 'npm run build'
                 }
             }
         }
