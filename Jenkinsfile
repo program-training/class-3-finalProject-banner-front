@@ -20,7 +20,11 @@ pipeline {
                 }
             }
         }
-
+        stage('Install Rollup Globally') {
+            steps {
+                sh 'npm install -g rollup'
+            }
+        }
         stage('Test Frontend') {
             steps {
                 script {
