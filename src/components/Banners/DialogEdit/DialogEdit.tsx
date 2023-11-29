@@ -113,7 +113,7 @@ export default function DialogEdit(props: EditBannersInterFace) {
             margin="dense"
             id="category"
             label="category"
-            placeHolder={categoryName}
+            placeholder={categoryName}
             type="text"
             fullWidth
           />
