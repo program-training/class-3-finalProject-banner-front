@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { BannersInterFace, CategoryInterface } from "./interfaces";
 
-export const useFetchBanner = (url: string) => {
+export const useFetchBanners = (url: string) => {
   const [allBanners, setAllBanners] = useState<BannersInterFace[]>([]);
   const [allCategories, setAllCategories] = useState<CategoryInterface[]>([]);
   useEffect(() => {
