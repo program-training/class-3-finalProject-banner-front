@@ -45,7 +45,8 @@ export default function DialogEdit(props: EditBannersInterFace) {
             margin="dense"
             id="url"
             label="Url"
-            placeHolder={props.url}
+            defaultValue={urlValue}
+            placeholder={props.url}
             type="text"
             fullWidth
             onChange={handleChange}
@@ -55,7 +56,6 @@ export default function DialogEdit(props: EditBannersInterFace) {
             margin="dense"
             id="title"
             label="title"
-            defaultValue={urlValue}
             placeholder={props.title}
             type="text"
             fullWidth
@@ -65,25 +65,25 @@ export default function DialogEdit(props: EditBannersInterFace) {
             margin="dense"
             id="text"
             label="text"
-            placeHolder={props.text}
+            placeholder={props.text}
             type="text"
             fullWidth
           />
           <TextField
             autoFocus
             margin="dense"
-            id="title"
+            id="image_url"
             label="image url"
-            placeHolder={props.image.url}
+            placeholder={props.image.url}
             type="text"
             fullWidth
           />
-           <TextField
+          <TextField
             autoFocus
             margin="dense"
             id="alt"
             label="image alt"
-            placeHolder={props.image.alt}
+            placeholder={props.image.alt}
             type="text"
             fullWidth
           />
