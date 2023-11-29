@@ -21,7 +21,7 @@ export interface BannersInterFace {
   url: string;
   category: string;
   image: {
-    url: string;
+    medium: string;
     alt: string;
   };
   title: string;

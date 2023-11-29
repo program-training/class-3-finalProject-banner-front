@@ -17,7 +17,7 @@ const GetBannerInfo = (banner: BannersInterFace) => {
             <CardMedia
               component="img"
               sx={{ height: 140 }}
-              image={banner.image.url}
+              image={banner.image.medium}
               alt={banner.image.alt}
             />
             <CardContent>
@@ -25,19 +25,19 @@ const GetBannerInfo = (banner: BannersInterFace) => {
                 {banner._id}
               </Typography>
               <Typography variant="body2" color="text.secondary" component="h1">
-                {banner.text}
+                {banner.category}
               </Typography>
               <Typography variant="body2" color="text.secondary" component="p">
-                {banner.userName}
+                {banner.title}
               </Typography>
               <Typography variant="body2" color="text.secondary" component="h1">
-                {banner.email}
+                {banner.text}
               </Typography>
               <Typography variant="body2" color="text.secondary" component="h1">
-                {banner.password}
+                {banner.createdAt.toString()}
               </Typography>
               <Typography variant="body2" color="text.secondary" component="h1">
-                {banner.isAdmin}
+                {banner.author}
               </Typography>
             </CardContent>
           </CardActionArea>

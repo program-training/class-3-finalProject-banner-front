@@ -55,7 +55,6 @@ export default function GetAllBanners() {
   const handleClickOpen = (bannerId: string) => {
     setOpen(true)
     setSelectedBannerId(bannerId)
-  };
 
   const handleClickPrevent = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -72,7 +71,7 @@ export default function GetAllBanners() {
                 <CardMedia
                   component="img"
                   sx={{ height: 140 }}
-                  image={banner.image.url}
+                  image={banner.image.medium}
                   alt={banner.image.alt}
                 />
                 <CardContent>
@@ -81,7 +80,21 @@ export default function GetAllBanners() {
                     color="text.secondary"
                     component="h1"
                   >
-                    {banner.text}
+                    {banner.title}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    component="p"
+                  >
+                    {banner.createdAt.toString()}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    component="p"
+                  >
+                    {banner.author}
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -94,7 +107,7 @@ export default function GetAllBanners() {
                   _id={banner._id}
                   url={banner.url}
                   image={{
-                    url: banner.image.url,
+                    url: banner.image.medium,
                     alt: banner.image.alt
                   }}
                   title={banner.title}
