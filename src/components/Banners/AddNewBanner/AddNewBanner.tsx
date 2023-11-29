@@ -2,7 +2,6 @@ import { useState } from "react";
 import {
   FormControl,
   TextField,
-  InputLabel,
   Select,
   MenuItem,
   Button,
@@ -12,14 +11,15 @@ import {
 import { useForm } from "react-hook-form";
 import { useFetchBanners } from "../../../utils/useFetchBanners";
 import { SelectChangeEvent } from "@mui/material";
-import { CategoryInterface } from "../../../utils/interfaces";
 import { SubmitHandler } from "react-hook-form";
+import { CategoryInterface } from "../../../utils/interfaces";
 
 type FormData = {
   url: string;
   title: string;
   text: string;
   category: string;
+  image: File | null;
 };
 
 const StyledForm = styled(Box)`
@@ -31,10 +31,14 @@ const StyledForm = styled(Box)`
 `;
 
 const AddNewBanner = () => {
+  const [formData, setFormData] = useState({
+    url: "",
+    title: "",
+    text: "",
+  });
+  const [selectedCategory, setSelectedCategory] =
+    useState<CategoryInterface | null>(null);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [urlValue, setUrlValue] = useState("");
-  const [TitleValue, setTitleValue] = useState("");
-  const [TextValue, setTextValue] = useState("");
   const { allCategories, setAllCategories } = useFetchBanners(
     "/api/banners/allCategories"
   );
@@ -53,57 +57,64 @@ const AddNewBanner = () => {
     console.log("Form data:", data);
   };
 
-  const handleChange = (event: SelectChangeEvent<unknown>) => {
-    const selectedCategory = event.target.value as CategoryInterface[];
-    setAllCategories(selectedCategory);
+  const handleCategoryChange = (event: SelectChangeEvent<unknown>) => {
+    const selectedCategoryName = event.target.value as string;
+    const selectedCategoryObject =
+      allCategories.find(
+        (category) => category.name === selectedCategoryName
+      ) || null;
+    setSelectedCategory(selectedCategoryObject);
+  };
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData((prevData) => ({ ...prevData, [field]: value }));
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <StyledForm>
-        <FormControl sx={{ "margin-bottom": "16px" }}>
+        <FormControl sx={{ marginBottom: "16px" }}>
           <TextField
             {...register("url", { required: true })}
             error={!!errors.url}
             helperText={errors.url?.message}
-            value={urlValue}
+            value={formData.url}
+            onChange={(event) => handleInputChange("url", event.target.value)}
             label="URL"
           />
         </FormControl>
 
-        <FormControl sx={{ "margin-bottom": "16px" }}>
+        <FormControl sx={{ marginBottom: "16px" }}>
           <TextField
             {...register("title")}
             label="Title"
-            value={TitleValue}
-            onChange={(event) => setTitleValue(event.target.value)}
+            value={formData.title}
+            onChange={(event) => handleInputChange("title", event.target.value)}
           />
         </FormControl>
 
-        <FormControl sx={{ "margin-bottom": "16px" }}>
+        <FormControl sx={{ marginBottom: "16px" }}>
           <TextField
             {...register("text")}
             label="Text"
-            value={TextValue}
-            onChange={(event) => setTitleValue(event.target.value)}
+            value={formData.text}
+            onChange={(event) => handleInputChange("text", event.target.value)}
           />
         </FormControl>
 
-        <FormControl sx={{ "margin-bottom": "16px" }}>
-          <InputLabel>Image</InputLabel>
+        <FormControl sx={{ marginBottom: "16px" }}>
           <input name="file" type="file" onChange={handleImageChange} />
         </FormControl>
 
-        <FormControl sx={{ "margin-bottom": "16px" }}>
-          <InputLabel>Category</InputLabel>
+        <FormControl sx={{ marginBottom: "16px" }}>
           <Select
             {...register("category", { required: true })}
             label="Category"
-            onChange={(event) => handleChange(event)}
-            value={allCategories.length > 0 ? allCategories[0]._id : ""}
+            onChange={handleCategoryChange}
+            value={selectedCategory?.name || ""}
           >
             {allCategories.map((category) => (
-              <MenuItem key={category._id} value={category._id}>
+              <MenuItem key={category._id} value={category.name}>
                 {category.name}
               </MenuItem>
             ))}
