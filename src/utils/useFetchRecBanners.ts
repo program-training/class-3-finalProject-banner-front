@@ -8,7 +8,7 @@ export const useFetchRecBanners = (url: string) => {
   >([]);
   const [products, setProducts] = useState<ProductInterface[]>([]);
 
-  const [recBannerById, setRecBannerById] = useState<ProductInterface>()
+  const [recBannerById, setRecBannerById] = useState<ProductInterface>();
 
   useEffect(() => {
     const fetchData = async () => {

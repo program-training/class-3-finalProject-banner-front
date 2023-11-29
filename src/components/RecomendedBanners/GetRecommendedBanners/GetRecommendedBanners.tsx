@@ -47,7 +47,7 @@ const GetRecommendedBanners = () => {
     <div className="cardsRacContainer">
       {recommendedBanners.map((banner) => (
         <div key={banner._id}>
-          <Link to={`/recBannerInfo/${banner._id}`} state={banner}>
+          <Link to={`/recBannerInfo/${banner._id}`}>
             <Card sx={{ maxWidth: 345, margin: '15px', borderRadius: '20px', boxShadow: '0 0 10px gray' }}>
               <CardActionArea>
                 <CardMedia

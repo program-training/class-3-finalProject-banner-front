@@ -1,4 +1,4 @@
-import { useFetchBanner } from "../../../utils/useFetchBanners";
+import { useFetchBanners } from "../../../utils/useFetchBanners";
 import Box from "@mui/material/Box";
 import {
   Card,
@@ -15,7 +15,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 export default function GetAllBanners() {
-  const { allBanners, setAllBanners } = useFetchBanner(
+  const { allBanners, setAllBanners } = useFetchBanners(
     `${import.meta.env.BASE_URL}/api/banners`
   );
 
@@ -38,14 +38,14 @@ export default function GetAllBanners() {
   return (
     <div>
       {allBanners.map((banner) => (
-        <Link to={""} state={banner}>
+        <Link to={`/bannerInfo/:${banner._id}`}>
           <Box sx={{ height: 320, transform: "translateZ(0px)", flexGrow: 1 }}>
             <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>
                 <CardMedia
                   component="img"
                   sx={{ height: 140 }}
-                  image={banner.image.medium}
+                  image={banner.image.url}
                   alt={banner.image.alt}
                 />
                 <CardContent>
