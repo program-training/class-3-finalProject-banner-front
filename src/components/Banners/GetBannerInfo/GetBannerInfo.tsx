@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { useFetchBanners } from "../../../utils/useFetchBanners";
 import { useParams } from "react-router-dom";
+import "./GetBannerInfo.css";
 
 const GetBannerInfo = () => {
   const params = useParams();
@@ -16,13 +17,13 @@ const GetBannerInfo = () => {
   );
 
   return (
-    <div>
-      <Box sx={{ height: 320, transform: "translateZ(0px)", flexGrow: 1 }}>
-        <Card sx={{ maxWidth: 345 }}>
+    <div className="infoBanner">
+      <Box sx={{ transform: "translateZ(0px)", flexGrow: 1 }}>
+        <Card sx={{ width: 800, height: 400 }}>
           <CardActionArea>
             <CardMedia
               component="img"
-              sx={{ height: 140 }}
+              sx={{ height: 250 }}
               image={bannerById?.image.url}
               alt={bannerById?.image.alt}
             />

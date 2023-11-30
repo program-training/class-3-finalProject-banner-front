@@ -60,7 +60,10 @@ const AddNewBanner = () => {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     console.log("Form data:", data);
     try {
-      await axios.post(`${import.meta.env.VITE_BASE_URL}/api/banners/banner`, data);
+      await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/api/banners/banner`,
+        data
+      );
       toast.success("Form submitted successfully!");
     } catch (error) {
       console.error(error);
@@ -89,7 +92,7 @@ const AddNewBanner = () => {
             {...register("url", { required: true })}
             error={!!errors.url}
             helperText={errors.url?.message}
-             value={formData.url}
+            value={formData.url}
             onChange={(event) => handleInputChange("url", event.target.value)}
             label="URL"
           />
@@ -100,7 +103,7 @@ const AddNewBanner = () => {
           <TextField
             {...register("title")}
             label="Title"
-             value={formData.title}
+            value={formData.title}
             onChange={(event) => handleInputChange("title", event.target.value)}
           />
         </FormControl>
