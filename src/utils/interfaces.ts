@@ -36,18 +36,3 @@ export interface CategoryInterface {
   image: string;
 }
 
-export interface EditBannersInterFace {
-  _id: string;
-  url: string;
-  category: string;
-  image: {
-    url: string;
-    alt: string;
-  };
-  title: string;
-  text: string;
-  createdAt: Date;
-  author: string;
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
