@@ -9,9 +9,25 @@ import { CardActionArea, CardActions, IconButton } from "@mui/material";
 import { toast, ToastContainer } from "react-toastify";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import "./AddNewRecommendedBanner.css";
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Skeleton from '@mui/material/Skeleton';
+
 const AddNewRecommendedBanner = () => {
 
   const { products } = useFetchRecBanners("/api/recommended/allProducts");
+
+  const skeletonBoxes = Array.from({ length: 10 }, () => (
+    <Box  sx={{ width: 220,padding:4, marginRight:0.5,marginLeft: 0.5,marginTop: 0, my:4 }}>
+      <Skeleton variant="rectangular" width={180} height={140} />
+      <Skeleton animation="wave"  width={120} height={60}/>
+      <Skeleton animation="wave"  width={150} height={16}/>
+      <Skeleton animation="wave"  width={150} height={16}/>
+      <Skeleton animation="wave"  width={150} height={16}/>
+      <Skeleton animation="wave"  width={150} height={16}/>
+      <Skeleton variant="rounded" width={180} height={55} />
+    </Box>
+  ));
 
   const handleProductClick = async (
     product: ProductInterface
@@ -56,7 +72,8 @@ const AddNewRecommendedBanner = () => {
 
   return (
     <div className="addNewBannerPage">
-      {products.map((product) => (
+      {products.length > 0 ? (
+       products.map((product) => (
         <Card key={product._id} sx={{maxWidth: 345, margin: '15px', borderRadius: '20px', boxShadow: '0 0 10px gray'}}>
           <CardActionArea>
             <CardMedia
@@ -96,7 +113,13 @@ const AddNewRecommendedBanner = () => {
               <ToastContainer />
           </CardActions>
         </Card>
-      ))}
+      ))
+      ) : (
+        <Grid container wrap="wrap-reverse">
+          {skeletonBoxes}
+        </Grid>
+      )
+    }
     </div>
   );
 };
