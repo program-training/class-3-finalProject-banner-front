@@ -9,24 +9,32 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { CardActionArea, IconButton, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import {
+  CardActionArea,
+  IconButton,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Skeleton from '@mui/material/Skeleton';
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Skeleton from "@mui/material/Skeleton";
 
 const GetRecommendedBanners = () => {
   const { recommendedBanners, setRecommendedBanners } = useFetchRecBanners(
     "/api/recommended/recProducts"
   );
   const skeletonBoxes = Array.from({ length: 8 }, () => (
-    <Box  sx={{ width: 220, marginRight:4,marginTop: 0, my:4 }}>
+    <Box sx={{ width: 220, marginRight: 4, marginTop: 0, my: 4 }}>
       <Skeleton variant="rectangular" width={220} height={140} />
-      <Skeleton animation="wave"  width={120} height={60}/>
-      <Skeleton animation="wave"  width={150} height={16}/>
-      <Skeleton animation="wave"  width={150} height={16}/>
-      <Skeleton animation="wave"  width={150} height={16}/>
-      <Skeleton animation="wave"  width={150} height={16}/>
+      <Skeleton animation="wave" width={120} height={60} />
+      <Skeleton animation="wave" width={150} height={16} />
+      <Skeleton animation="wave" width={150} height={16} />
+      <Skeleton animation="wave" width={150} height={16} />
+      <Skeleton animation="wave" width={150} height={16} />
       <Skeleton variant="rounded" width={220} height={55} />
     </Box>
   ));
@@ -69,66 +77,69 @@ const GetRecommendedBanners = () => {
 
   return (
     <div className="cardsRacContainer">
-          {recommendedBanners.length > 0 ? (
-            recommendedBanners.map((banner) => (
-              <div key={banner._id}>
-                <Link to={`/recBannerInfo/${banner._id}`} state={banner}>
-                  <Card
-                    sx={{
-                      maxWidth: 345,
-                      margin: "15px",
-                      borderRadius: "20px",
-                      boxShadow: "0 0 10px gray",
+      {recommendedBanners.length > 0 ? (
+        recommendedBanners.map((banner) => (
+          <div key={banner._id}>
+            <Link to={`/recBannerInfo/${banner._id}`} state={banner}>
+              <Card
+                sx={{
+                  maxWidth: 345,
+                  margin: "15px",
+                  borderRadius: "20px",
+                  boxShadow: "0 0 10px gray",
+                }}
+              >
+                <CardActionArea>
+                  <CardMedia
+                    sx={{ height: 150 }}
+                    image={banner.image.medium}
+                    title={banner.image.alt}
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {banner.name}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      description: {banner.description}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      category: {banner.category}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      created by: {banner.author}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      at: {banner.createdAt.toLocaleString()}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <IconButton
+                    onClick={(event) => {
+                      handleClick(banner._id);
+                      handleClickStop(event);
                     }}
+                    color="error"
+                    size="large"
                   >
-                    <CardActionArea>
-                      <CardMedia
-                        sx={{ height: 150 }}
-                        image={banner.image.medium}
-                        title={banner.image.alt}
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                          {banner.name}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          description: {banner.description}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          category: {banner.category}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          created by: {banner.author}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          at: {banner.createdAt.toLocaleString()}
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                    <CardActions
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <IconButton
-                        onClick={(event) => {handleClick(banner._id); handleClickStop(event)}}
-                        color="error"
-                        size="large"
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                      <ToastContainer />
-                    </CardActions>
-                  </Card>
-                </Link>
-              </div>
-            ))
-          ) : (
-            <Grid container wrap="wrap-reverse">
-              {skeletonBoxes}
-            </Grid>
+                    <DeleteIcon />
+                  </IconButton>
+                  <ToastContainer />
+                </CardActions>
+              </Card>
+            </Link>
+          </div>
+        ))
+      ) : (
+        <Grid container wrap="wrap-reverse">
+          {skeletonBoxes}
+        </Grid>
       )}
 
       <Dialog
@@ -156,4 +167,3 @@ const GetRecommendedBanners = () => {
   );
 };
 export default GetRecommendedBanners;
-

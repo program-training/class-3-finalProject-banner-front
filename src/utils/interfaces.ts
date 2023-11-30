@@ -21,7 +21,7 @@ export interface BannersInterFace {
   url: string;
   category: string;
   image: {
-    medium: string;
+    url: string;
     alt: string;
   };
   title: string;
@@ -35,6 +35,4 @@ export interface CategoryInterface {
   name: string;
   image: string;
 }
-
-
 

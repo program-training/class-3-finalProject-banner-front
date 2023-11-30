@@ -1,5 +1,6 @@
-import { useFetchBanner } from "../../../utils/useFetchBanners";
+import { useFetchBanners } from "../../../utils/useFetchBanners";
 import Box from "@mui/material/Box";
+import { ToastContainer, toast } from "react-toastify";
 import {
   Button,
   Card,
@@ -13,46 +14,49 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Skeleton from '@mui/material/Skeleton';
 import { useNavigate } from "react-router-dom";
 export default function GetAllBanners() {
   const navigate = useNavigate()
 
-  const { allBanners, setAllBanners } = useFetchBanner(
+  const { allBanners, setAllBanners } = useFetchBanners(
     `/api/banners/allBanners`
   );
 
   const skeletonBoxes = Array.from({ length: 8 }, () => (
-    <Box  sx={{ width: 220, marginRight:4,marginTop: 0, my:4 }}>
+    <Box sx={{ width: 220, marginRight: 4, marginTop: 0, my: 4 }}>
       <Skeleton variant="rectangular" width={220} height={140} />
-      <Skeleton animation="wave"  width={120} height={60}/>
-      <Skeleton animation="wave"  width={150} height={16}/>
-      <Skeleton animation="wave"  width={150} height={16}/>
-      <Skeleton animation="wave"  width={150} height={16}/>
-      <Skeleton animation="wave"  width={150} height={16}/>
+      <Skeleton animation="wave" width={120} height={60} />
+      <Skeleton animation="wave" width={150} height={16} />
+      <Skeleton animation="wave" width={150} height={16} />
+      <Skeleton animation="wave" width={150} height={16} />
+      <Skeleton animation="wave" width={150} height={16} />
       <Skeleton variant="rounded" width={220} height={55} />
     </Box>
   ));
 
-  
-  const handelDeleteClick = async (bannerId: string) => {
+  const handleDeleteClick = async (bannerId: string) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/banners/${bannerId}`);
+
+      await axios.delete(
+        `${import.meta.env.VITE_BASE_URL}/api/banners/banner/${bannerId}`
+      );
       setAllBanners((prevBanners) =>
         prevBanners.filter((banner) => banner._id !== bannerId)
       );
+      toast.success("Banner deleted successfully");
     } catch (err) {
       console.error(err);
+      toast.error("Error deleting banner");
       throw err;
     }
   };
 
   const handleClickPrevent = (event: React.MouseEvent) => {
     event.preventDefault();
-  }
-  
+  };
+
   return (
     <div>
       {allBanners.length > 0 ? (
@@ -64,7 +68,7 @@ export default function GetAllBanners() {
                 <CardMedia
                   component="img"
                   sx={{ height: 140 }}
-                  image={banner.image.medium}
+                  image={banner.image.url}
                   alt={banner.image.alt}
                 />
                 <CardContent>
@@ -93,10 +97,16 @@ export default function GetAllBanners() {
                 </CardContent>
               </CardActionArea>
               <CardActions>
-                <IconButton onClick={() => handelDeleteClick(banner._id)}>
-                  <DeleteIcon />
-                </IconButton>
+              <IconButton
+                    onClick={(event) => {
+                      handleClickPrevent(event);
+                      handleDeleteClick(banner._id);
+                    }}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
                 <Button onClick={(event) => {handleClickPrevent(event),  navigate(`/editBanner/${banner._id}`)}}>Edit </Button>
+                <ToastContainer />
               </CardActions>
             </Card>
           </Box>
@@ -106,9 +116,7 @@ export default function GetAllBanners() {
         <Grid container wrap="wrap-reverse">
           {skeletonBoxes}
         </Grid>
-      )
-    }
+      )}
     </div>
   );
 }
-

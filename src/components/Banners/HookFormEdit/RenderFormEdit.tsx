@@ -1,11 +1,11 @@
 import HookFormEdit from "./hookForm";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useFetchBanner } from "../../../utils/useFetchBanners";
+import { useFetchBanners } from "../../../utils/useFetchBanners";
 
 export default function RenderFromEdit() {
   const params = useParams();
-  const { allBanners } = useFetchBanner(`/api/banners/allBanners`);
+  const { allBanners } = useFetchBanners(`/api/banners/allBanners`);
 
   const [defaultValues, setDefaultValues] = useState({
     _id: "",
@@ -27,7 +27,7 @@ export default function RenderFromEdit() {
         setDefaultValues({
           _id: selectedBanner._id,
           url: selectedBanner.url,
-          image: { medium: selectedBanner.image.medium, alt: selectedBanner.image.alt },
+          image: { medium: selectedBanner.image.url, alt: selectedBanner.image.alt },
           title: selectedBanner.title,
           text: selectedBanner.text,
           createdAt: selectedBanner.createdAt,

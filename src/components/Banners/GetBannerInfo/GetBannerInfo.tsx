@@ -1,4 +1,3 @@
-import { BannersInterFace } from "../../../utils/interfaces";
 import Box from "@mui/material/Box";
 import {
   Card,
@@ -7,8 +6,15 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+import { useFetchBanners } from "../../../utils/useFetchBanners";
+import { useParams } from "react-router-dom";
 
-const GetBannerInfo = (banner: BannersInterFace) => {
+const GetBannerInfo = () => {
+  const params = useParams();
+  const { bannerById } = useFetchBanners(
+    `/api/banners/bannerById/${params.id}`
+  );
+
   return (
     <div>
       <Box sx={{ height: 320, transform: "translateZ(0px)", flexGrow: 1 }}>
@@ -17,27 +23,27 @@ const GetBannerInfo = (banner: BannersInterFace) => {
             <CardMedia
               component="img"
               sx={{ height: 140 }}
-              image={banner.image.medium}
-              alt={banner.image.alt}
+              image={bannerById?.image.url}
+              alt={bannerById?.image.alt}
             />
             <CardContent>
               <Typography variant="body2" color="text.secondary" component="h1">
-                {banner._id}
+                {bannerById?._id}
               </Typography>
               <Typography variant="body2" color="text.secondary" component="h1">
-                {banner.category}
+                {bannerById?.category}
               </Typography>
               <Typography variant="body2" color="text.secondary" component="p">
-                {banner.title}
+                {bannerById?.title}
               </Typography>
               <Typography variant="body2" color="text.secondary" component="h1">
-                {banner.text}
+                {bannerById?.text}
               </Typography>
               <Typography variant="body2" color="text.secondary" component="h1">
-                {banner.createdAt.toString()}
+                {bannerById?.createdAt?.toLocaleString() ?? "N/A"}
               </Typography>
               <Typography variant="body2" color="text.secondary" component="h1">
-                {banner.author}
+                {bannerById?.author}
               </Typography>
             </CardContent>
           </CardActionArea>
