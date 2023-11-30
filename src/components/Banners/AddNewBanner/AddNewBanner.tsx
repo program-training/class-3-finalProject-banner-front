@@ -39,12 +39,13 @@ const AddNewBanner = () => {
     title: "",
     text: "",
   });
+
   const [selectedCategory, setSelectedCategory] =
     useState<CategoryInterface | null>(null);
+
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const { allCategories, setAllCategories } = useFetchBanners(
-    "/api/banners/allCategories"
-  );
+
+  const { allCategories } = useFetchBanners("/api/banners/allCategories");
 
   const {
     register,
@@ -59,7 +60,7 @@ const AddNewBanner = () => {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     console.log("Form data:", data);
     try {
-      await axios.post(`${import.meta.env.BASE_URL}/api/banners/banner`, data);
+      await axios.post(`${import.meta.env.VITE_BASE_URL}/api/banners/banner`, data);
       toast.success("Form submitted successfully!");
     } catch (error) {
       console.error(error);
