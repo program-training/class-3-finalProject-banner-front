@@ -39,12 +39,13 @@ const AddNewBanner = () => {
     title: "",
     text: "",
   });
+
   const [selectedCategory, setSelectedCategory] =
     useState<CategoryInterface | null>(null);
+
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const { allCategories, setAllCategories } = useFetchBanners(
-    "/api/banners/allCategories"
-  );
+
+  const { allCategories } = useFetchBanners("/api/banners/allCategories");
 
   const {
     register,
