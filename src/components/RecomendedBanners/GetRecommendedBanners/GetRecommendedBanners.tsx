@@ -27,8 +27,8 @@ const GetRecommendedBanners = () => {
   const { recommendedBanners, setRecommendedBanners } = useFetchRecBanners(
     "/api/recommended/recProducts"
   );
-  const skeletonBoxes = Array.from({ length: 8 }, () => (
-    <Box sx={{ width: 220, marginRight: 4, marginTop: 0, my: 4 }}>
+  const skeletonBoxes = Array.from({ length: 10 }, () => (
+    <Box sx={{ width: 220, marginRight: 4, marginTop: 0, my: 7 }}>
       <Skeleton variant="rectangular" width={220} height={140} />
       <Skeleton animation="wave" width={120} height={60} />
       <Skeleton animation="wave" width={150} height={16} />
