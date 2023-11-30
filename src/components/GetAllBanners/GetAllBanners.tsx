@@ -1,4 +1,4 @@
-import { useFetchBanner } from "../../utils/useFetchBanners";
+import { useFetchBanners } from "../../utils/useFetchBanners";
 import Box from "@mui/material/Box";
 import {
   Card,
@@ -15,7 +15,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 export default function GetAllBanners() {
-  const { allBanners, setAllBanners } = useFetchBanner(
+  const { allBanners, setAllBanners } = useFetchBanners(
     `${import.meta.env.VITE_BASE_URL_API_RENDER}/api/banners`
   );
 
