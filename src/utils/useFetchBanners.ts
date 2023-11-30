@@ -17,6 +17,7 @@ export const useFetchBanners = (url: string) => {
           const data = res.data;
           setAllBanners(data);
           setAllCategories(data);
+          setBannerById(data);
         } else {
           console.log("error fetching banners", res.status);
         }
@@ -33,5 +34,7 @@ export const useFetchBanners = (url: string) => {
     setAllBanners,
     allCategories,
     setAllCategories,
+    bannerById,
+    setBannerById,
   };
 };
