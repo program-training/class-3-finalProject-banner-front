@@ -77,7 +77,7 @@ export default function GetBannerIframe() {
       }
     };
     fetchBanners();
-  }, []);
+  }, [categoryName, oneCategory]);
 
   return (
     <Box sx={{ padding: padding, paddingLeft: paddingLeft }}>
