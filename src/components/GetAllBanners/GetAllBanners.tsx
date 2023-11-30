@@ -47,7 +47,7 @@ export default function GetAllBanners() {
                 <CardMedia
                   component="img"
                   sx={{ height: 140 }}
-                  image={banner.image.medium}
+                  image={banner.image.url}
                   alt={banner.image.alt}
                 />
                 <CardContent>
