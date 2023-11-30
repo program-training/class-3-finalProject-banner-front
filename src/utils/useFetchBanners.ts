@@ -10,12 +10,14 @@ export const useFetchBanners = (url: string) => {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}${url}`);
+        const res = await axios.get(
+          `${import.meta.env.VITE_BASE_URL_API_RENDER}${url}`
+        );
         if (res.status < 300 && res.status >= 200) {
           const data = res.data;
           setAllBanners(data);
-          setBannerById(data);
           setAllCategories(data);
+          setBannerById(data);
         } else {
           console.log("error fetching banners", res.status);
         }
@@ -30,9 +32,9 @@ export const useFetchBanners = (url: string) => {
   return {
     allBanners,
     setAllBanners,
-    bannerById,
-    setBannerById,
     allCategories,
     setAllCategories,
+    bannerById,
+    setBannerById,
   };
 };
