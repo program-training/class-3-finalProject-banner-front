@@ -21,7 +21,7 @@ export interface BannersInterFace {
   url: string;
   category: string;
   image: {
-    medium: string;
+    url: string;
     alt: string;
   };
   title: string;
@@ -51,5 +51,3 @@ export interface EditBannersInterFace {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
-

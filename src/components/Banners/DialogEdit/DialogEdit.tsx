@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
 import {  EditBannersInterFace } from "../../../utils/interfaces";
-import { useFetchBanner } from "../../../utils/useFetchBanners";
+import { useFetchBanners } from "../../../utils/useFetchBanners";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -13,7 +13,7 @@ export default function DialogEdit(props: EditBannersInterFace) {
   const [categoryName] = useState<string>(props.category);
   const [urlValue, setUrlValue] = useState('')
 
-  const { allCategories } = useFetchBanner('/api/banners/allCategories');
+  const { allCategories } = useFetchBanners('/api/banners/allCategories');
 
   const handleChange = (event: React.ChangeEvent<{ value: string }>) => {
     setUrlValue(event.target.value as string);
