@@ -53,32 +53,31 @@ export default function GetBannerIframe() {
   ];
   const oneCategory = shuffleAndSlice(categoryNames);
 
-  const fetchBanners = async () => {
-    const category = categoryName
-      ? `?categoryName=${categoryName}`
-      : `?categoryName=${oneCategory}`;
-
-    try {
-      const res = await axios.get(
-        `${
-          import.meta.env.VITE_BASE_URL_API_RENDER
-        }/api/banners/banners${category}`
-      );
-      if (res.status < 300 && res.status >= 200) {
-        const data = res.data;
-        setBanner(data);
-      } else {
-        console.log("error fetching banners", res.status);
-      }
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  };
-
   useEffect(() => {
+    const fetchBanners = async () => {
+      const category = categoryName
+        ? `?categoryName=${categoryName}`
+        : `?categoryName=${oneCategory}`;
+
+      try {
+        const res = await axios.get(
+          `${
+            import.meta.env.VITE_BASE_URL_API_RENDER
+          }/api/banners/banners${category}`
+        );
+        if (res.status < 300 && res.status >= 200) {
+          const data = res.data;
+          setBanner(data);
+        } else {
+          console.log("error fetching banners", res.status);
+        }
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
+    };
     fetchBanners();
-  }, []);
+  }, [categoryName, oneCategory]);
 
   return (
     <Box sx={{ padding: padding, paddingLeft: paddingLeft }}>

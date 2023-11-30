@@ -10,8 +10,10 @@ import { useFetchBanners } from "../../../utils/useFetchBanners";
 import { useParams } from "react-router-dom";
 
 const GetBannerInfo = () => {
-  const { id } = useParams();
-  const { bannerById } = useFetchBanners(`api/banners/bannerById/:${id}`);
+  const params = useParams();
+  const { bannerById } = useFetchBanners(
+    `/api/banners/bannerById/${params.id}`
+  );
 
   return (
     <div>
@@ -38,7 +40,7 @@ const GetBannerInfo = () => {
                 {bannerById?.text}
               </Typography>
               <Typography variant="body2" color="text.secondary" component="h1">
-                {bannerById?.createdAt.toLocaleString()}
+                {bannerById?.createdAt?.toLocaleString() ?? "N/A"}
               </Typography>
               <Typography variant="body2" color="text.secondary" component="h1">
                 {bannerById?.author}
