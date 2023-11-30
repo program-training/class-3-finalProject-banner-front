@@ -27,8 +27,8 @@ const GetRecommendedBanners = () => {
   const { recommendedBanners, setRecommendedBanners } = useFetchRecBanners(
     "/api/recommended/recProducts"
   );
-  const skeletonBoxes = Array.from({ length: 8 }, () => (
-    <Box sx={{ width: 220, marginRight: 4, marginTop: 0, my: 4 }}>
+  const skeletonBoxes = Array.from({ length: 8 }, (_, index) => (
+    <Box key={index} sx={{ width: 220, marginRight: 4, marginTop: 0, my: 4 }}>
       <Skeleton variant="rectangular" width={220} height={140} />
       <Skeleton animation="wave" width={120} height={60} />
       <Skeleton animation="wave" width={150} height={16} />
@@ -56,7 +56,7 @@ const GetRecommendedBanners = () => {
     try {
       await axios.delete(
         `${
-          import.meta.env.VITE_BASE_URL_API_RENDER
+          import.meta.env.VITE_BASE_URL
         }/api/recommended/recProduct/${selectedBannerId}`
       );
       setRecommendedBanners((prevBanners) =>

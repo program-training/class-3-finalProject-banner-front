@@ -1,19 +1,25 @@
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import { useState } from 'react';
-import {  EditBannersInterFace } from "../../../utils/interfaces";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import { useState } from "react";
+import { EditBannersInterFace } from "../../../utils/interfaces";
 import { useFetchBanners } from "../../../utils/useFetchBanners";
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 export default function DialogEdit(props: EditBannersInterFace) {
   const [categoryName] = useState<string>(props.category);
-  const [urlValue, setUrlValue] = useState('')
+  const [urlValue, setUrlValue] = useState("");
 
-  const { allCategories } = useFetchBanners('/api/banners/allCategories');
+  const { allCategories } = useFetchBanners("/api/banners/allCategories");
 
   const handleChange = (event: React.ChangeEvent<{ value: string }>) => {
     setUrlValue(event.target.value as string);
@@ -29,16 +35,23 @@ export default function DialogEdit(props: EditBannersInterFace) {
 
   const handleClickPrevent = (event: React.MouseEvent) => {
     event.preventDefault();
-  }
+  };
 
   return (
     <div>
-      <Dialog open={props.open} onClose={handleClose} aria-labelledby="form-dialog-title" onClick={(event) => {handleClickPrevent(event)}}>
+      <Dialog
+        open={props.open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+        onClick={(event) => {
+          handleClickPrevent(event);
+        }}
+      >
         <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To subscribe to this website, please enter your email address here. We will send updates
-            occasionally.
+            To subscribe to this website, please enter your email address here.
+            We will send updates occasionally.
           </DialogContentText>
           <TextField
             autoFocus
@@ -88,9 +101,11 @@ export default function DialogEdit(props: EditBannersInterFace) {
             fullWidth
           />
           {allCategories.map((category) => (
-            <div>
-              <FormControl sx={{margin: 1, minWidth: 120}}>
-                <InputLabel id="demo-controlled-open-select-label" >Age</InputLabel>
+            <div key={category._id}>
+              <FormControl sx={{ margin: 1, minWidth: 120 }}>
+                <InputLabel id="demo-controlled-open-select-label">
+                  Age
+                </InputLabel>
                 <Select
                   labelId="demo-controlled-open-select-label"
                   id="demo-controlled-open-select"
@@ -98,7 +113,6 @@ export default function DialogEdit(props: EditBannersInterFace) {
                   onClose={handleClose}
                   onOpen={handleClickOpen}
                   value={props.category}
-               
                 >
                   <MenuItem value="">
                     <em>None</em>
