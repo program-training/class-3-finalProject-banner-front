@@ -133,7 +133,7 @@ const AddNewBanner = () => {
             {...register("category", { required: true })}
             label="Category"
             onChange={handleCategoryChange}
-            value={selectedCategory?.name || ""}
+            value={selectedCategory ? selectedCategory.name : ""}
           >
             {allCategories.map((category) => (
               <MenuItem key={category._id} value={category.name}>
