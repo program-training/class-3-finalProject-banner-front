@@ -14,8 +14,6 @@ const GetBannerInfo = () => {
   const { bannerById } = useFetchBanners(
     `/api/banners/bannerById/${params.id}`
   );
-  console.log(params.id);
-  console.log("banner by id", bannerById);
 
   return (
     <div>

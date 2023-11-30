@@ -78,7 +78,7 @@ export default function GetBannerIframe() {
 
   useEffect(() => {
     fetchBanners();
-  }, []);
+  }, [fetchBanners]);
 
   return (
     <Box sx={{ padding: padding, paddingLeft: paddingLeft }}>
