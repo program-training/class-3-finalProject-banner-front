@@ -1,5 +1,6 @@
 import { useFetchBanners } from "../../../utils/useFetchBanners";
 import Box from "@mui/material/Box";
+import { ToastContainer, toast } from "react-toastify";
 import {
   Button,
   Card,
@@ -13,15 +14,12 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import Grid from "@mui/material/Grid";
-import Skeleton from "@mui/material/Skeleton";
-import DialogEdit from "../DialogEdit/DialogEdit";
-import { toast, ToastContainer } from "react-toastify";
-
+import Grid from '@mui/material/Grid';
+import Skeleton from '@mui/material/Skeleton';
+import { useNavigate } from "react-router-dom";
 export default function GetAllBanners() {
-  const [open, setOpen] = useState(false);
-  const [selectedBannerId, setSelectedBannerId] = useState("");
+  const navigate = useNavigate()
+
   const { allBanners, setAllBanners } = useFetchBanners(
     `/api/banners/allBanners`
   );
@@ -40,6 +38,7 @@ export default function GetAllBanners() {
 
   const handleDeleteClick = async (bannerId: string) => {
     try {
+
       await axios.delete(
         `${import.meta.env.VITE_BASE_URL}/api/banners/banner/${bannerId}`
       );
@@ -54,11 +53,6 @@ export default function GetAllBanners() {
     }
   };
 
-  const handleClickOpen = (bannerId: string) => {
-    setOpen(true);
-    setSelectedBannerId(bannerId);
-  };
-
   const handleClickPrevent = (event: React.MouseEvent) => {
     event.preventDefault();
   };
@@ -66,46 +60,44 @@ export default function GetAllBanners() {
   return (
     <div>
       {allBanners.length > 0 ? (
-        allBanners.map((banner) => (
-          <Link key={banner._id} to={`/getBannerInfo/${banner._id}`}>
-            <Box
-              sx={{ height: 320, transform: "translateZ(0px)", flexGrow: 1 }}
-            >
-              <Card sx={{ maxWidth: 345 }}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    sx={{ height: 140 }}
-                    image={banner.image.url}
-                    alt={banner.image.alt}
-                  />
-                  <CardContent>
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      component="h1"
-                    >
-                      {banner.title}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      component="div"
-                    >
-                      {banner.createdAt && banner.createdAt.toString()}
-                    </Typography>
+      allBanners.map((banner) => (
+        <Link key={banner._id} to={`/getBannerInfo/${banner._id}`} state={banner}>
+          <Box sx={{ height: 320, transform: "translateZ(0px)", flexGrow: 1 }}>
+            <Card sx={{ maxWidth: 345 }}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  sx={{ height: 140 }}
+                  image={banner.image.url}
+                  alt={banner.image.alt}
+                />
+                <CardContent>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    component="h1"
+                  >
+                    {banner.title}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    component="div"
+                  >
+                    {banner.createdAt && banner.createdAt.toString()}
+                  </Typography>
 
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      component="p"
-                    >
-                      {banner.author}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-                <CardActions>
-                  <IconButton
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    component="p"
+                  >
+                    {banner.author}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+              <CardActions>
+              <IconButton
                     onClick={(event) => {
                       handleClickPrevent(event);
                       handleDeleteClick(banner._id);
@@ -113,35 +105,13 @@ export default function GetAllBanners() {
                   >
                     <DeleteIcon />
                   </IconButton>
-                  <Button
-                    onClick={(event) => {
-                      handleClickOpen(banner._id);
-                      handleClickPrevent(event);
-                    }}
-                  >
-                    Edit{" "}
-                  </Button>
-                  <DialogEdit
-                    _id={banner._id}
-                    url={banner.url}
-                    image={{
-                      url: banner.image.url,
-                      alt: banner.image.alt,
-                    }}
-                    title={banner.title}
-                    text={banner.text}
-                    createdAt={banner.createdAt}
-                    author={banner.author}
-                    category={banner.category}
-                    open={open}
-                    setOpen={setOpen}
-                  />
-                  <ToastContainer />
-                </CardActions>
-              </Card>
-            </Box>
-          </Link>
-        ))
+                <Button onClick={(event) => {handleClickPrevent(event),  navigate(`/editBanner/${banner._id}`)}}>Edit </Button>
+                <ToastContainer />
+              </CardActions>
+            </Card>
+          </Box>
+        </Link>
+      ))
       ) : (
         <Grid container wrap="wrap-reverse">
           {skeletonBoxes}

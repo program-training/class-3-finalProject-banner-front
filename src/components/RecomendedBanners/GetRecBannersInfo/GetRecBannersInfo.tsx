@@ -43,7 +43,7 @@ const GetRecBannersInfo = () => {
     try {
       await axios.delete(
         `${
-          import.meta.env.VITE_BASE_URL_API_RENDER
+          import.meta.env.VITE_BASE_URL
         }/api/recommended/recProduct/${params.id}`
       );
       setRecommendedBanners((prevBanners) =>
