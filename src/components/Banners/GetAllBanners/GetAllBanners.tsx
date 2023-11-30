@@ -16,15 +16,9 @@ import { Link } from "react-router-dom";
 import { useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Skeleton from '@mui/material/Skeleton';
-import DialogEdit from "../DialogEdit/DialogEdit";
-import Edit from "../DialogEdit/hookForm";
 import { useNavigate } from "react-router-dom";
 export default function GetAllBanners() {
   const navigate = useNavigate()
-  const [open, setOpen] = useState(false);
-  const [selectedBannerId, setSelectedBannerId] = useState("");
-  
-  console.log(selectedBannerId)
 
   const { allBanners, setAllBanners } = useFetchBanner(
     `/api/banners/allBanners`
@@ -45,7 +39,7 @@ export default function GetAllBanners() {
   
   const handelDeleteClick = async (bannerId: string) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_BASE_URL_API_RENDER}/api/banners/${bannerId}`);
+      await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/banners/${bannerId}`);
       setAllBanners((prevBanners) =>
         prevBanners.filter((banner) => banner._id !== bannerId)
       );
@@ -54,11 +48,6 @@ export default function GetAllBanners() {
       throw err;
     }
   };
-
-  const handleClickOpen = (bannerId: string) => {
-    setOpen(true)
-    setSelectedBannerId(bannerId)
-  }
 
   const handleClickPrevent = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -107,21 +96,7 @@ export default function GetAllBanners() {
                 <IconButton onClick={() => handelDeleteClick(banner._id)}>
                   <DeleteIcon />
                 </IconButton>
-                <Button onClick={(event) => {handleClickPrevent(event), navigate(`/editBanner/${banner._id}`)}}>Edit </Button>
-                <Edit
-                  _id={banner._id}
-                  url={banner.url}
-                  image={{
-                    medium: banner.image.medium,
-                    alt: banner.image.alt
-                  }}
-                  title={banner.title}
-                  text={banner.text}
-                  createdAt={banner.createdAt}
-                  author={banner.author}
-                  category={banner.category}   
-
-                  />
+                <Button onClick={(event) => {handleClickPrevent(event),  navigate(`/editBanner/${banner._id}`)}}>Edit </Button>
               </CardActions>
             </Card>
           </Box>

@@ -8,7 +8,7 @@ export const useFetchBanner = (url: string) => {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_BASE_URL_API_RENDER}${url}`);
+        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}${url}`);
         if (res.status < 300 && res.status >= 200) {
           const data = res.data;
           setAllBanners(data);

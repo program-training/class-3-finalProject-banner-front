@@ -9,6 +9,8 @@ import AddNewRecommendedBanner from "./components/RecomendedBanners/AddNewRecomm
 import GetRecBannersInfo from "./components/RecomendedBanners/GetRecBannersInfo/GetRecBannersInfo";
 import HomeRecommended from "./components/RecomendedBanners/HomeRecommended/HomeRecommended";
 import HomeBanners from "./components/Banners/HomeBanners/HomeBanners";
+import HookFormEdit from "./components/Banners/HookFormEdit/hookForm";
+import RenderFromEdit from "./components/Banners/HookFormEdit/RenderFormEdit";
 function App() {
   return (
     <>
@@ -23,6 +25,7 @@ function App() {
             <Route path="/addNewRec" element={<AddNewRecommendedBanner />} />
             <Route path="/login" element={<SignIn />} />
             <Route path="/register" element={<SignUp />} />
+            <Route path="/editBanner/:id" element={<RenderFromEdit/>} />
           </Route>
         </Routes>
       </BrowserRouter>
