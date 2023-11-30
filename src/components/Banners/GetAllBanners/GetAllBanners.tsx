@@ -17,6 +17,8 @@ import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import Skeleton from "@mui/material/Skeleton";
 import DialogEdit from "../DialogEdit/DialogEdit";
+import { toast, ToastContainer } from "react-toastify";
+
 export default function GetAllBanners() {
   const [open, setOpen] = useState(false);
   const [selectedBannerId, setSelectedBannerId] = useState("");
@@ -36,16 +38,18 @@ export default function GetAllBanners() {
     </Box>
   ));
 
-  const handelDeleteClick = async (bannerId: string) => {
+  const handleDeleteClick = async (bannerId: string) => {
     try {
       await axios.delete(
-        `${import.meta.env.VITE_BASE_URL_API_RENDER}/api/banners/${bannerId}`
+        `${import.meta.env.VITE_BASE_URL}/api/banners/banner/${bannerId}`
       );
       setAllBanners((prevBanners) =>
         prevBanners.filter((banner) => banner._id !== bannerId)
       );
+      toast.success("Banner deleted successfully");
     } catch (err) {
       console.error(err);
+      toast.error("Error deleting banner");
       throw err;
     }
   };
@@ -63,7 +67,7 @@ export default function GetAllBanners() {
     <div>
       {allBanners.length > 0 ? (
         allBanners.map((banner) => (
-          <Link to={`/getBannerInfo/${banner._id}`} state={banner}>
+          <Link key={banner._id} to={`/getBannerInfo/${banner._id}`}>
             <Box
               sx={{ height: 320, transform: "translateZ(0px)", flexGrow: 1 }}
             >
@@ -101,7 +105,12 @@ export default function GetAllBanners() {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <IconButton onClick={() => handelDeleteClick(banner._id)}>
+                  <IconButton
+                    onClick={(event) => {
+                      handleClickPrevent(event);
+                      handleDeleteClick(banner._id);
+                    }}
+                  >
                     <DeleteIcon />
                   </IconButton>
                   <Button
@@ -127,6 +136,7 @@ export default function GetAllBanners() {
                     open={open}
                     setOpen={setOpen}
                   />
+                  <ToastContainer />
                 </CardActions>
               </Card>
             </Box>
