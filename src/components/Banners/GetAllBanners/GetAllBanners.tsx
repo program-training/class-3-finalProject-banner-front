@@ -17,11 +17,12 @@ import { Link } from "react-router-dom";
 import Grid from '@mui/material/Grid';
 import Skeleton from '@mui/material/Skeleton';
 import { useNavigate } from "react-router-dom";
+import './GetAllBanners.css'
 export default function GetAllBanners() {
   const navigate = useNavigate()
 
   const { allBanners, setAllBanners } = useFetchBanners(
-    `/api/banners/allBanners`
+    `/banners/allBanners`
   );
 
   const skeletonBoxes = Array.from({ length: 8 }, (_, index) => (
@@ -40,7 +41,7 @@ export default function GetAllBanners() {
     try {
 
       await axios.delete(
-        `${import.meta.env.VITE_BASE_URL}/api/banners/banner/${bannerId}`
+        `${import.meta.env.VITE_BASE_URL}/banners/banner/${bannerId}`
       );
       setAllBanners((prevBanners) =>
         prevBanners.filter((banner) => banner._id !== bannerId)
@@ -58,12 +59,12 @@ export default function GetAllBanners() {
   };
 
   return (
-    <div>
+    <div className="bannerStyle">
       {allBanners.length > 0 ? (
       allBanners.map((banner) => (
         <Link key={banner._id} to={`/getBannerInfo/${banner._id}`} state={banner}>
           <Box sx={{ height: 320, transform: "translateZ(0px)", flexGrow: 1 }}>
-            <Card sx={{ maxWidth: 345 }}>
+            <Card sx={{ width: 345, margin: 5}}>
               <CardActionArea>
                 <CardMedia
                   component="img"
