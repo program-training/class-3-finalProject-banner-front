@@ -7,7 +7,7 @@ type FormValues = {
   url: string;
   category: string;
   image: {
-    medium: string;
+    url: string;
     alt: string;
   };
   title: string;
@@ -46,6 +46,7 @@ export default function HookFormEdit({
           margin="dense"
           placeholder={defaultValues._id}
           defaultValue={defaultValues._id}
+          helperText = {defaultValues._id}
         />
         <TextField
           {...register("url")}
@@ -55,6 +56,7 @@ export default function HookFormEdit({
           margin="dense"
           placeholder={defaultValues.url}
           defaultValue={defaultValues.url}
+          helperText={defaultValues.url}
         />
         <TextField
           {...register("category")}
@@ -64,15 +66,19 @@ export default function HookFormEdit({
           margin="dense"
           defaultValue={defaultValues.category}
           placeholder={defaultValues.category}
+          helperText={defaultValues.category}
+
         />
         <TextField
-          {...register("image.medium")}
-          label="image.medium"
+          {...register("image.url")}
+          label="image.url"
           fullWidth
           type="text"
           margin="dense"
-          defaultValue={defaultValues.image.medium}
-          placeholder={defaultValues.image.medium}
+          defaultValue={defaultValues.image.url}
+          placeholder={defaultValues.image.url}
+          helperText={defaultValues.image.url}
+
 
         />
         <TextField
@@ -83,6 +89,8 @@ export default function HookFormEdit({
           margin="dense"
           defaultValue={defaultValues.image.alt}
           placeholder={defaultValues.image.alt}
+          helperText={defaultValues.image.alt}
+
 
         />
         <TextField
@@ -93,6 +101,8 @@ export default function HookFormEdit({
           margin="dense"
           defaultValue={defaultValues.title}
           placeholder={defaultValues.title}
+          helperText={defaultValues.title}
+
 
         />
         <TextField
@@ -103,6 +113,8 @@ export default function HookFormEdit({
           margin="dense"
           defaultValue={defaultValues.text}
           placeholder={defaultValues.text}
+          helperText={defaultValues.text}
+
 
         />
         <TextField
@@ -125,9 +137,10 @@ export default function HookFormEdit({
           margin="dense"
           defaultValue={defaultValues.author}
           placeholder={defaultValues.author}
+          helperText={defaultValues.author}
+
 
         />
-
       <Button type="submit" sx={{backgroundColor: "aqua" ,width: '100%'}}>
         Submit
       </Button>

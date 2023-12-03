@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import Grid from '@mui/material/Grid';
 import Skeleton from '@mui/material/Skeleton';
 import { useNavigate } from "react-router-dom";
+import './GetAllBanners.css'
 export default function GetAllBanners() {
   const navigate = useNavigate()
 
@@ -58,12 +59,12 @@ export default function GetAllBanners() {
   };
 
   return (
-    <div>
+    <div className="bannerStyle">
       {allBanners.length > 0 ? (
       allBanners.map((banner) => (
         <Link key={banner._id} to={`/getBannerInfo/${banner._id}`} state={banner}>
           <Box sx={{ height: 320, transform: "translateZ(0px)", flexGrow: 1 }}>
-            <Card sx={{ maxWidth: 345 }}>
+            <Card sx={{ width: 345, margin: 5}}>
               <CardActionArea>
                 <CardMedia
                   component="img"
