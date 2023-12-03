@@ -1,13 +1,20 @@
 import { Box, TextField , Button} from "@mui/material";
 import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
+ import { useState } from "react";
+ import { CategoryInterface } from "../../../utils/interfaces";
+import { useFetchBanners } from "../../../utils/useFetchBanners";
+import { SelectChangeEvent } from "@mui/material";
+import { MenuItem, Select,  FormControl, InputLabel } from "@mui/material";
+import { useNavigate } from "react-router";
+
 
 type FormValues = {
   _id: string;
   url: string;
   category: string;
   image: {
-    medium: string;
+    url: string;
     alt: string;
   };
   title: string;
@@ -21,11 +28,19 @@ export default function HookFormEdit({
 }: {
   defaultValues: FormValues;
 }) {
+
+  const navigate = useNavigate()
+  const [selectedCategory, setSelectedCategory] =
+  useState<CategoryInterface | null>(null);
+
+  const { allCategories } = useFetchBanners("/banners/allCategories");
+
+
   const { register, handleSubmit } = useForm<FormValues>();
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
       await axios.put(
-        `${import.meta.env.VITE_BASE_URL}/api/banners/banner/${defaultValues._id}`,
+        `${import.meta.env.VITE_BASE_URL}/banners/banner/${defaultValues._id}`,
         data
       );
       console.log(data);
@@ -34,6 +49,16 @@ export default function HookFormEdit({
       throw err;
     }
   };
+
+  const handleCategoryChange = (event: SelectChangeEvent<unknown>) => {
+    const selectedCategoryName = event.target.value as string;
+    const selectedCategoryObject =
+      allCategories.find(
+        (category) => category.name === selectedCategoryName
+      ) || null;
+    setSelectedCategory(selectedCategoryObject);
+  };
+
 
   return (
     <Box sx={{ width: 800 }}>
@@ -46,6 +71,7 @@ export default function HookFormEdit({
           margin="dense"
           placeholder={defaultValues._id}
           defaultValue={defaultValues._id}
+          helperText = {defaultValues._id}
         />
         <TextField
           {...register("url")}
@@ -55,24 +81,36 @@ export default function HookFormEdit({
           margin="dense"
           placeholder={defaultValues.url}
           defaultValue={defaultValues.url}
+          helperText={defaultValues.url}
         />
+        <FormControl sx={{  width: '100%' }}>
+          <InputLabel id="demo-simple-select-label" style={{ width: '100%'}}>
+            category: {defaultValues.category}
+          </InputLabel> 
+          <Select
+            {...register("category", { required: true })}
+            label="Category"
+            onChange={handleCategoryChange}
+            value={selectedCategory ? selectedCategory.name : ""}
+          >
+            {allCategories.map((category) => (
+              <MenuItem key={category._id} value={category.name}>
+                {category.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
         <TextField
-          {...register("category")}
-          label="category"
+          {...register("image.url")}
+          label="image.url"
           fullWidth
           type="text"
           margin="dense"
-          defaultValue={defaultValues.category}
-          placeholder={defaultValues.category}
-        />
-        <TextField
-          {...register("image.medium")}
-          label="image.medium"
-          fullWidth
-          type="text"
-          margin="dense"
-          defaultValue={defaultValues.image.medium}
-          placeholder={defaultValues.image.medium}
+          defaultValue={defaultValues.image.url}
+          placeholder={defaultValues.image.url}
+          helperText={defaultValues.image.url}
+
 
         />
         <TextField
@@ -83,6 +121,8 @@ export default function HookFormEdit({
           margin="dense"
           defaultValue={defaultValues.image.alt}
           placeholder={defaultValues.image.alt}
+          helperText={defaultValues.image.alt}
+
 
         />
         <TextField
@@ -93,6 +133,8 @@ export default function HookFormEdit({
           margin="dense"
           defaultValue={defaultValues.title}
           placeholder={defaultValues.title}
+          helperText={defaultValues.title}
+
 
         />
         <TextField
@@ -103,6 +145,8 @@ export default function HookFormEdit({
           margin="dense"
           defaultValue={defaultValues.text}
           placeholder={defaultValues.text}
+          helperText={defaultValues.text}
+
 
         />
         <TextField
@@ -125,8 +169,9 @@ export default function HookFormEdit({
           margin="dense"
           defaultValue={defaultValues.author}
           placeholder={defaultValues.author}
-
+          helperText={defaultValues.author}
         />
+
 
       <Button type="submit" sx={{backgroundColor: "aqua" ,width: '100%'}}>
         Submit

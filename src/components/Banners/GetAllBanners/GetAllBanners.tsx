@@ -21,9 +21,7 @@ import "./GetAllBanners.css";
 export default function GetAllBanners() {
   const navigate = useNavigate();
 
-  const { allBanners, setAllBanners } = useFetchBanners(
-    `/api/banners/allBanners`
-  );
+  const { allBanners, setAllBanners } = useFetchBanners(`/banners/allBanners`);
 
   const skeletonBoxes = Array.from({ length: 8 }, (_, index) => (
     <Box key={index} sx={{ width: 220, marginRight: 4, marginTop: 0, my: 4 }}>
@@ -38,7 +36,7 @@ export default function GetAllBanners() {
   const handleDeleteClick = async (bannerId: string) => {
     try {
       await axios.delete(
-        `${import.meta.env.VITE_BASE_URL}/api/banners/banner/${bannerId}`
+        `${import.meta.env.VITE_BASE_URL}/banners/banner/${bannerId}`
       );
       setAllBanners((prevBanners) =>
         prevBanners.filter((banner) => banner._id !== bannerId)
@@ -67,7 +65,7 @@ export default function GetAllBanners() {
             <Box
               sx={{ height: 320, transform: "translateZ(0px)", flexGrow: 1 }}
             >
-              <Card sx={{ width: 200, margin: 5 }}>
+              <Card sx={{ width: 345, margin: 5 }}>
                 <CardActionArea>
                   <CardMedia
                     component="img"

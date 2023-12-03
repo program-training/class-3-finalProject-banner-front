@@ -14,7 +14,7 @@ import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
 
 const AddNewRecommendedBanner = () => {
-  const { products } = useFetchRecBanners("/api/recommended/allProducts");
+  const { products } = useFetchRecBanners("/recommended/allProducts");
 
   const skeletonBoxes = Array.from({ length: 7 }, () => (
     <Box
@@ -59,7 +59,7 @@ const AddNewRecommendedBanner = () => {
         author: "ari",
       };
       const res = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/recommended/recProduct`,
+        `${import.meta.env.VITE_BASE_URL}/recommended/recProduct`,
         newBannerData
       );
 

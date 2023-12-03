@@ -15,8 +15,7 @@ import { SubmitHandler } from "react-hook-form";
 import { CategoryInterface } from "../../../utils/interfaces";
 import axios from "axios";
 import { toast } from "react-toastify";
-// import { ErrorMessage } from "@hookform/error-message";
-
+import { ErrorMessage } from "@hookform/error-message";
 type FormData = {
   url: string;
   title: string;
@@ -45,7 +44,7 @@ const AddNewBanner = () => {
 
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
-  const { allCategories } = useFetchBanners("/api/banners/allCategories");
+  const { allCategories } = useFetchBanners("/banners/allCategories");
 
   const {
     register,
@@ -60,10 +59,7 @@ const AddNewBanner = () => {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     console.log("Form data:", data);
     try {
-      await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/banners/banner`,
-        data
-      );
+      await axios.post(`${import.meta.env.VITE_BASE_URL}/banners/banner`, data);
       toast.success("Form submitted successfully!");
     } catch (error) {
       console.error(error);
@@ -113,7 +109,7 @@ const AddNewBanner = () => {
           <TextField
             {...register("text")}
             label="Text"
-            value={formData.text}
+            // value={formData.text}
             onChange={(event) => handleInputChange("text", event.target.value)}
           />
         </FormControl>

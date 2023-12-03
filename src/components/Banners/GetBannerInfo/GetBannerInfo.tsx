@@ -13,7 +13,7 @@ import "./GetBannerInfo.css";
 const GetBannerInfo = () => {
   const params = useParams();
   const { bannerById } = useFetchBanners(
-    `/api/banners/bannerById/${params.id}`
+    `/banners/bannerById/${params.id}`
   );
 
   return (
