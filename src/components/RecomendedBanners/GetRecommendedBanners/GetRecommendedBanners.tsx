@@ -81,7 +81,7 @@ const GetRecommendedBanners = () => {
       {recommendedBanners.length > 0 ? (
         recommendedBanners.map((banner) => (
           <div key={banner._id}>
-            <Link to={`/recBannerInfo/${banner._id}`} state={banner}>
+            <Link to={`/recBannerInfo/${banner._id}`}>
               <Card
                 sx={{
                   maxWidth: 345,
