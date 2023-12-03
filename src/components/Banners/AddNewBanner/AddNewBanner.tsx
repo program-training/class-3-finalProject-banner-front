@@ -88,22 +88,22 @@ const AddNewBanner = () => {
             {...register("url", { required: true })}
             error={!!errors.url}
             helperText={errors.url?.message}
-            //  value={formData.url}
+            value={formData.url}
             onChange={(event) => handleInputChange("url", event.target.value)}
             label="URL"
           />
         </FormControl>
-        <ErrorMessage errors={errors} name="url" />
+        {/* <ErrorMessage errors={errors} name="url" /> */}
 
         <FormControl sx={{ marginBottom: "16px" }}>
           <TextField
             {...register("title")}
             label="Title"
-            //  value={formData.title}
+            value={formData.title}
             onChange={(event) => handleInputChange("title", event.target.value)}
           />
         </FormControl>
-        <ErrorMessage errors={errors} name="title" />
+        {/* <ErrorMessage errors={errors} name="title" /> */}
 
         <FormControl sx={{ marginBottom: "16px" }}>
           <TextField
@@ -113,7 +113,7 @@ const AddNewBanner = () => {
             onChange={(event) => handleInputChange("text", event.target.value)}
           />
         </FormControl>
-        <ErrorMessage errors={errors} name="text" />
+        {/* <ErrorMessage errors={errors} name="text" /> */}
 
         <FormControl sx={{ marginBottom: "16px" }}>
           <input name="file" type="file" onChange={handleImageChange} />
@@ -125,7 +125,7 @@ const AddNewBanner = () => {
             />
           )}
         </FormControl>
-        <ErrorMessage errors={errors} name="image" />
+        {/* <ErrorMessage errors={errors} name="image" /> */}
 
         <FormControl sx={{ marginBottom: "16px" }}>
           <Select
@@ -141,7 +141,7 @@ const AddNewBanner = () => {
             ))}
           </Select>
         </FormControl>
-        <ErrorMessage errors={errors} name="Category" />
+        {/* <ErrorMessage errors={errors} name="Category" /> */}
 
         <Button type="submit" variant="contained" color="primary">
           Submit
