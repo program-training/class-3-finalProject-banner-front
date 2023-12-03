@@ -17,8 +17,8 @@ import { setUser, UserState } from "../../redux/features/user/userReducer";
 import { useNavigate } from "react-router-dom";
 import { userLogin } from "../../api/usersApi";
 import { UserLogin } from "../../interfaces/User";
-import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
@@ -43,18 +43,18 @@ export default function SignIn() {
       const userData: UserLogin = {
         email: data.get("email") as string,
         password: data.get("password") as string,
-      }
-      toast.info('Logging in...');
-      const responseUserLogin = await userLogin(userData)
-      
+      };
+      toast.info("Logging in...");
+      const responseUserLogin = await userLogin(userData);
+
       if (responseUserLogin.status === 200) {
-        toast.success('Login successful!');
+        toast.success("Login successful!");
         dispatchUser(setUser(user));
-        
+
         navigate("/");
       }
     } catch (error) {
-      toast.error('Login failed!');
+      toast.error("Login failed!");
       console.log(error);
     }
   };

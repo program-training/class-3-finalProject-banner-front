@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -9,12 +9,10 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
 
-
 export default function MenuButtonAccount() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [isLoggedIn] = React.useState(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [isLoggedIn] = useState(false);
   const navigate = useNavigate();
-
 
   const isMenuOpen = Boolean(anchorEl);
 
@@ -28,15 +26,13 @@ export default function MenuButtonAccount() {
 
   const handleLogIn = () => {
     setAnchorEl(null);
-    setTimeout(() => navigate('/login'), 1000);
+    setTimeout(() => navigate("/login"), 1000);
   };
   const handleRegister = () => {
-    navigate('/register')
+    navigate("/register");
   };
 
-  const handleLogHot = () => {
-    
-  };
+  const handleLogHot = () => {};
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (

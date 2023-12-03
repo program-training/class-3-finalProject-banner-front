@@ -1,21 +1,22 @@
 // import styles from './Popup.module.css';
 
-import * as React from "react";
+import { useState, useEffect, useCallback } from "react";
 import { styled, Theme } from "@mui/system";
 import {
   Unstable_Popup as BasePopup,
   PopupChildrenProps,
 } from "@mui/base/Unstable_Popup";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 
 interface AnimatedPopupProps {
   children: React.ReactNode;
 }
 
-export default function AnimatedPopup({children,}: AnimatedPopupProps): React.ReactElement {
-  const [anchor] = React.useState<HTMLButtonElement | null>(null);
-  const [open, setOpen] = React.useState(true);
-
+export default function AnimatedPopup({
+  children,
+}: AnimatedPopupProps): React.ReactElement {
+  const [anchor] = useState<HTMLButtonElement | null>(null);
+  const [open, setOpen] = useState(true);
 
   return (
     <div>
@@ -25,14 +26,18 @@ export default function AnimatedPopup({children,}: AnimatedPopupProps): React.Re
       <BasePopup anchor={anchor} open={open} withTransition>
         {(props: PopupChildrenProps) => (
           <PopAnimation {...props}>
-              <div className="font-icon-wrapper" style={{position: "absolute", marginTop: '1rem', marginLeft: '1.3rem'}} onClick={() => setOpen((o) => !o)}>
-                <CloseIcon/>
-              </div>
-            <PopupBody>
-
-              
-              {children}
-            </PopupBody>
+            <div
+              className="font-icon-wrapper"
+              style={{
+                position: "absolute",
+                marginTop: "1rem",
+                marginLeft: "1.3rem",
+              }}
+              onClick={() => setOpen((o) => !o)}
+            >
+              <CloseIcon />
+            </div>
+            <PopupBody>{children}</PopupBody>
           </PopAnimation>
         )}
       </BasePopup>
@@ -50,13 +55,13 @@ function Animated(
 ) {
   const { requestOpen, onEnter, onExited, children, className } = props;
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (requestOpen) {
       onEnter();
     }
   }, [onEnter, requestOpen]);
 
-  const handleAnimationEnd = React.useCallback(() => {
+  const handleAnimationEnd = useCallback(() => {
     if (!requestOpen) {
       onExited();
     }

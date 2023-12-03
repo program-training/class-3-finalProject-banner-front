@@ -89,7 +89,7 @@ const AddNewBanner = () => {
             {...register("url", { required: true })}
             error={!!errors.url}
             helperText={errors.url?.message}
-            // value={formData.url}
+             value={formData.url}
             onChange={(event) => handleInputChange("url", event.target.value)}
             label="URL"
           />
@@ -100,7 +100,7 @@ const AddNewBanner = () => {
           <TextField
             {...register("title")}
             label="Title"
-            // value={formData.title}
+             value={formData.title}
             onChange={(event) => handleInputChange("title", event.target.value)}
           />
         </FormControl>
@@ -110,7 +110,7 @@ const AddNewBanner = () => {
           <TextField
             {...register("text")}
             label="Text"
-            // value={formData.text}
+            value={formData.text}
             onChange={(event) => handleInputChange("text", event.target.value)}
           />
         </FormControl>
@@ -133,7 +133,7 @@ const AddNewBanner = () => {
             {...register("category", { required: true })}
             label="Category"
             onChange={handleCategoryChange}
-            value={selectedCategory?.name || ""}
+            value={selectedCategory ? selectedCategory.name : ""}
           >
             {allCategories.map((category) => (
               <MenuItem key={category._id} value={category.name}>
