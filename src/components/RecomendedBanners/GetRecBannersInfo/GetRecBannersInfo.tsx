@@ -69,13 +69,14 @@ const GetRecBannersInfo = () => {
         }}
       >
         <CardMedia
+          component="img"
+          height="400"
+          width="550"
+          src={recBannerById?.image.medium}
+          alt={recBannerById?.image.alt}
           sx={{
-            height: 400,
-            width: 550,
             backgroundColor: "#d4d6c3",
           }}
-          image={recBannerById?.image.medium}
-          title={recBannerById?.image.alt}
         />
         <CardContent
           sx={{

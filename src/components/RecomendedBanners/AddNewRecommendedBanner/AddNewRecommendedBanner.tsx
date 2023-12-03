@@ -59,9 +59,7 @@ const AddNewRecommendedBanner = () => {
         author: "ari",
       };
       const res = await axios.post(
-        `${
-          import.meta.env.VITE_BASE_URL
-        }/api/recommended/recProduct`,
+        `${import.meta.env.VITE_BASE_URL}/api/recommended/recProduct`,
         newBannerData
       );
 
