@@ -1,4 +1,3 @@
-import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,12 +9,6 @@ import MenuButtonAccount from '../MenuButtonAccount/MenuButtonAccount';
 
 export default function Header() {
 
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
-
-  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-  
   const mobileMenuId = 'primary-search-account-menu-mobile';
 
   return (
@@ -42,7 +35,6 @@ export default function Header() {
               aria-label="show more"
               aria-controls={mobileMenuId}
               aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
               color="inherit"
             >
               <HeaderMenuItem />

@@ -1,10 +1,12 @@
 // import styles from './Popup.module.css';
-import * as React from "react";
+
+import { useState, useEffect, useCallback } from "react";
 import { styled, Theme } from "@mui/system";
 import {
   Unstable_Popup as BasePopup,
   PopupChildrenProps,
 } from "@mui/base/Unstable_Popup";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface AnimatedPopupProps {
   children: React.ReactNode;
@@ -13,17 +15,28 @@ interface AnimatedPopupProps {
 export default function AnimatedPopup({
   children,
 }: AnimatedPopupProps): React.ReactElement {
-  const [anchor, setAnchor] = React.useState<HTMLButtonElement | null>(null);
-  const [open, setOpen] = React.useState(false);
+  const [anchor] = useState<HTMLButtonElement | null>(null);
+  const [open, setOpen] = useState(true);
 
   return (
     <div>
-      <Button ref={setAnchor} onClick={() => setOpen((o) => !o)} type="button">
+      {/* <Button ref={setAnchor} onClick={() => setOpen((o) => !o)} type="button">
         Show Login
-      </Button>
+      </Button> */}
       <BasePopup anchor={anchor} open={open} withTransition>
         {(props: PopupChildrenProps) => (
           <PopAnimation {...props}>
+            <div
+              className="font-icon-wrapper"
+              style={{
+                position: "absolute",
+                marginTop: "1rem",
+                marginLeft: "1.3rem",
+              }}
+              onClick={() => setOpen((o) => !o)}
+            >
+              <CloseIcon />
+            </div>
             <PopupBody>{children}</PopupBody>
           </PopAnimation>
         )}
@@ -42,13 +55,13 @@ function Animated(
 ) {
   const { requestOpen, onEnter, onExited, children, className } = props;
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (requestOpen) {
       onEnter();
     }
   }, [onEnter, requestOpen]);
 
-  const handleAnimationEnd = React.useCallback(() => {
+  const handleAnimationEnd = useCallback(() => {
     if (!requestOpen) {
       onExited();
     }
@@ -135,57 +148,57 @@ const PopupBody = styled("div")(
 `
 );
 
-const blue = {
-  200: "#99CCFF",
-  300: "#66B2FF",
-  400: "#3399FF",
-  500: "#007FFF",
-  600: "#0072E5",
-  700: "#0066CC",
-};
+// const blue = {
+//   200: "#99CCFF",
+//   300: "#66B2FF",
+//   400: "#3399FF",
+//   500: "#007FFF",
+//   600: "#0072E5",
+//   700: "#0066CC",
+// };
 
-const Button = styled("button")(
-  ({ theme }) => `
-  font-family: IBM Plex Sans, sans-serif;
-  font-weight: 600;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  background-color: ${blue[500]};
-  padding: 8px 16px;
-  border-radius: 8px;
-  color: white;
-  transition: all 150ms ease;
-  cursor: pointer;
-  border: 1px solid ${blue[500]};
-  box-shadow: 0 2px 1px ${
-    theme.palette.mode === "dark"
-      ? "rgba(0, 0, 0, 0.5)"
-      : "rgba(45, 45, 60, 0.2)"
-  }, inset 0 1.5px 1px ${blue[400]}, inset 0 -2px 1px ${blue[600]};
+// const Button = styled("button")(
+//   ({ theme }) => `
+//   font-family: IBM Plex Sans, sans-serif;
+//   font-weight: 600;
+//   font-size: 0.875rem;
+//   line-height: 1.5;
+//   background-color: ${blue[500]};
+//   padding: 8px 16px;
+//   border-radius: 8px;
+//   color: white;
+//   transition: all 150ms ease;
+//   cursor: pointer;
+//   border: 1px solid ${blue[500]};
+//   box-shadow: 0 2px 1px ${
+//     theme.palette.mode === "dark"
+//       ? "rgba(0, 0, 0, 0.5)"
+//       : "rgba(45, 45, 60, 0.2)"
+//   }, inset 0 1.5px 1px ${blue[400]}, inset 0 -2px 1px ${blue[600]};
 
-  &:hover {
-    background-color: ${blue[600]};
-  }
+//   &:hover {
+//     background-color: ${blue[600]};
+//   }
 
-  &:active {
-    background-color: ${blue[700]};
-    box-shadow: none;
-  }
+//   &:active {
+//     background-color: ${blue[700]};
+//     box-shadow: none;
+//   }
 
-  &:focus-visible {
-    box-shadow: 0 0 0 4px ${
-      theme.palette.mode === "dark" ? blue[300] : blue[200]
-    };
-    outline: none;
-  }
+//   &:focus-visible {
+//     box-shadow: 0 0 0 4px ${
+//       theme.palette.mode === "dark" ? blue[300] : blue[200]
+//     };
+//     outline: none;
+//   }
 
-  &.disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-    box-shadow: none;
-    &:hover {
-      background-color: ${blue[500]};
-    }
-  }
-`
-);
+//   &.disabled {
+//     opacity: 0.4;
+//     cursor: not-allowed;
+//     box-shadow: none;
+//     &:hover {
+//       background-color: ${blue[500]};
+//     }
+//   }
+// `
+// );

@@ -1,0 +1,4 @@
+.cardsRacContainer {
+    display: flex;
+    flex-wrap: wrap;
+}

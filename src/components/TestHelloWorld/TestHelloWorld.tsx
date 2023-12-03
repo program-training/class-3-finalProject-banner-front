@@ -6,7 +6,8 @@ export default function HelloWorld() {
 
   const handelClick = async () => {
     try {
-      const response = await axios.get("http://localhost:8181/api/hello");
+      
+      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/hello`);
       setGetFromData(response.data);
     } catch (error) {
       console.error("error to fetch data", error);
@@ -16,6 +17,7 @@ export default function HelloWorld() {
     <div>
       <button onClick={handelClick}>
         Click to show!
+        <p>----- Response -----</p>
         <p>{getFromData}</p>
       </button>
     </div>
