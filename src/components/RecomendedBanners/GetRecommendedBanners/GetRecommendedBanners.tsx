@@ -25,7 +25,7 @@ import Skeleton from "@mui/material/Skeleton";
 
 const GetRecommendedBanners = () => {
   const { recommendedBanners, setRecommendedBanners } = useFetchRecBanners(
-    "/api/recommended/recProducts"
+    "/recommended/recProducts"
   );
   const skeletonBoxes = Array.from({ length: 8 }, (_, index) => (
     <Box key={index} sx={{ width: 220, marginRight: 4, marginTop: 0, my: 4 }}>
@@ -57,7 +57,7 @@ const GetRecommendedBanners = () => {
       await axios.delete(
         `${
           import.meta.env.VITE_BASE_URL
-        }/api/recommended/recProduct/${selectedBannerId}`
+        }/recommended/recProduct/${selectedBannerId}`
       );
       setRecommendedBanners((prevBanners) =>
         prevBanners.filter((banner) => banner._id !== selectedBannerId)

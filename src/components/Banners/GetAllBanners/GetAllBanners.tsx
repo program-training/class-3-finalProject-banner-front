@@ -22,7 +22,7 @@ export default function GetAllBanners() {
   const navigate = useNavigate()
 
   const { allBanners, setAllBanners } = useFetchBanners(
-    `/api/banners/allBanners`
+    `/banners/allBanners`
   );
 
   const skeletonBoxes = Array.from({ length: 8 }, (_, index) => (
@@ -41,7 +41,7 @@ export default function GetAllBanners() {
     try {
 
       await axios.delete(
-        `${import.meta.env.VITE_BASE_URL}/api/banners/banner/${bannerId}`
+        `${import.meta.env.VITE_BASE_URL}/banners/banner/${bannerId}`
       );
       setAllBanners((prevBanners) =>
         prevBanners.filter((banner) => banner._id !== bannerId)

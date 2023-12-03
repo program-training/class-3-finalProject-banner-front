@@ -7,7 +7,7 @@ export async function userRegister(userData: UserReg) {
     const config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://beckend-banners-deploy.onrender.com/api/users/register/',
+        url: 'https://beckend-banners-deploy.onrender.com/users/register/',
         headers: { 
           'Content-Type': 'application/json'
         },
@@ -27,7 +27,7 @@ export async function userLogin(userData: UserLogin) {
     const config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://beckend-banners-deploy.onrender.com/api/users/login/',
+        url: 'https://beckend-banners-deploy.onrender.com/users/login/',
         headers: { 
           'Content-Type': 'application/json'
         },

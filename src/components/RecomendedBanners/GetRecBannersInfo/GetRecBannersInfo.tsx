@@ -24,11 +24,11 @@ const GetRecBannersInfo = () => {
   const [openDialog, setOpenDialog] = useState(false);
 
   const { recBannerById } = useFetchRecBanners(
-    `/api/recommended/recProductsById/${params.id}`
+    `/recommended/recProductsById/${params.id}`
   );
 
   const { setRecommendedBanners } = useFetchRecBanners(
-    "/api/recommended/recProducts"
+    "/recommended/recProducts"
   );
 
   const handleClick = () => {
@@ -44,7 +44,7 @@ const GetRecBannersInfo = () => {
       await axios.delete(
         `${
           import.meta.env.VITE_BASE_URL
-        }/api/recommended/recProduct/${params.id}`
+        }/recommended/recProduct/${params.id}`
       );
       setRecommendedBanners((prevBanners) =>
         prevBanners.filter((banner) => banner._id !== params.id)

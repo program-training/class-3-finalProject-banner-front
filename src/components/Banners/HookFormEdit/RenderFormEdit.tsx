@@ -5,7 +5,7 @@ import { useFetchBanners } from "../../../utils/useFetchBanners";
 
 export default function RenderFromEdit() {
   const params = useParams();
-  const { allBanners } = useFetchBanners(`/api/banners/allBanners`);
+  const { allBanners } = useFetchBanners(`/banners/allBanners`);
 
   const [defaultValues, setDefaultValues] = useState({
     _id: "",

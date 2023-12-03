@@ -1,6 +1,13 @@
 import { Box, TextField , Button} from "@mui/material";
 import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
+ import { useState } from "react";
+ import { CategoryInterface } from "../../../utils/interfaces";
+import { useFetchBanners } from "../../../utils/useFetchBanners";
+import { SelectChangeEvent } from "@mui/material";
+import { MenuItem, Select,  FormControl, InputLabel } from "@mui/material";
+import { useNavigate } from "react-router";
+
 
 type FormValues = {
   _id: string;
@@ -21,11 +28,19 @@ export default function HookFormEdit({
 }: {
   defaultValues: FormValues;
 }) {
+
+  const navigate = useNavigate()
+  const [selectedCategory, setSelectedCategory] =
+  useState<CategoryInterface | null>(null);
+
+  const { allCategories } = useFetchBanners("/banners/allCategories");
+
+
   const { register, handleSubmit } = useForm<FormValues>();
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
       await axios.put(
-        `${import.meta.env.VITE_BASE_URL}/api/banners/banner/${defaultValues._id}`,
+        `${import.meta.env.VITE_BASE_URL}/banners/banner/${defaultValues._id}`,
         data
       );
       console.log(data);
@@ -34,6 +49,16 @@ export default function HookFormEdit({
       throw err;
     }
   };
+
+  const handleCategoryChange = (event: SelectChangeEvent<unknown>) => {
+    const selectedCategoryName = event.target.value as string;
+    const selectedCategoryObject =
+      allCategories.find(
+        (category) => category.name === selectedCategoryName
+      ) || null;
+    setSelectedCategory(selectedCategoryObject);
+  };
+
 
   return (
     <Box sx={{ width: 800 }}>
@@ -58,17 +83,24 @@ export default function HookFormEdit({
           defaultValue={defaultValues.url}
           helperText={defaultValues.url}
         />
-        <TextField
-          {...register("category")}
-          label="category"
-          fullWidth
-          type="text"
-          margin="dense"
-          defaultValue={defaultValues.category}
-          placeholder={defaultValues.category}
-          helperText={defaultValues.category}
+        <FormControl sx={{  width: '100%' }}>
+          <InputLabel id="demo-simple-select-label" style={{ width: '100%'}}>
+            category: {defaultValues.category}
+          </InputLabel> 
+          <Select
+            {...register("category", { required: true })}
+            label="Category"
+            onChange={handleCategoryChange}
+            value={selectedCategory ? selectedCategory.name : ""}
+          >
+            {allCategories.map((category) => (
+              <MenuItem key={category._id} value={category.name}>
+                {category.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
-        />
         <TextField
           {...register("image.url")}
           label="image.url"
@@ -138,9 +170,9 @@ export default function HookFormEdit({
           defaultValue={defaultValues.author}
           placeholder={defaultValues.author}
           helperText={defaultValues.author}
-
-
         />
+
+
       <Button type="submit" sx={{backgroundColor: "aqua" ,width: '100%'}}>
         Submit
       </Button>

@@ -7,7 +7,7 @@ export default function HelloWorld() {
   const handelClick = async () => {
     try {
       
-      const response = await axios.get(`${import.meta.env.VITE_BASE_URL_API_RENDER}/hello`);
+      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/hello`);
       setGetFromData(response.data);
     } catch (error) {
       console.error("error to fetch data", error);
