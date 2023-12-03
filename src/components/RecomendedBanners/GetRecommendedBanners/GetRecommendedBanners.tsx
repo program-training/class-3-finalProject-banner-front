@@ -27,6 +27,7 @@ const GetRecommendedBanners = () => {
   const { recommendedBanners, setRecommendedBanners } = useFetchRecBanners(
     "/recommended/recProducts"
   );
+
   const skeletonBoxes = Array.from({ length: 8 }, (_, index) => (
     <Box key={index} sx={{ width: 220, marginRight: 4, marginTop: 0, my: 4 }}>
       <Skeleton variant="rectangular" width={220} height={140} />
