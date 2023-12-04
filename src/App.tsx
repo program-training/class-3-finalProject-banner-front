@@ -13,11 +13,12 @@ import RenderFromEdit from "./components/Banners/HookFormEdit/RenderFormEdit";
 import AddNewBanner from "./components/Banners/AddNewBanner/AddNewBanner";
 import GetBannerInfo from "./components/Banners/GetBannerInfo/GetBannerInfo";
 import GetBannerIframe from "./components/GetBannerIframe/GetBannerIframe";
+
 function App() {
   return (
     <>
       <CssBaseline />
-      <BrowserRouter basename="/banner">
+      <BrowserRouter basename="/env/banner">
         <Routes>
           <Route element={<BaseLayout />}>
             <Route path="/" element={<Home />} />
