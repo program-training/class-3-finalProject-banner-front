@@ -30,6 +30,7 @@ pipeline {
                 )
             }
         }
+    }
         failure {
             script {
                 echo 'Pipeline failed. Blocking pull request merge.'
