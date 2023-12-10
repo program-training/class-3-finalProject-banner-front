@@ -9,7 +9,7 @@ pipeline {
                 }
             }
         }
-        stage('client build ...') {
+        stage('client build') {
             steps {
                 script {
                     dir('client') {
