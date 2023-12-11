@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     dir('client') {
-                        sh 'echo "Building..."'
+                        sh 'echo "Building...."'
                         sh 'docker build -t banner-client .'
                     }
                 }
