@@ -18,7 +18,7 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <BrowserRouter basename="/env/banner">
+      <BrowserRouter basename="/banner">
         <Routes>
           <Route element={<BaseLayout />}>
             <Route path="/" element={<Home />} />
