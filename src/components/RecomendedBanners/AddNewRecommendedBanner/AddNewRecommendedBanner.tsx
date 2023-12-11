@@ -16,24 +16,25 @@ import Skeleton from "@mui/material/Skeleton";
 const AddNewRecommendedBanner = () => {
   const { products } = useFetchRecBanners("/recommended/allProducts");
 
-  const skeletonBoxes = Array.from({ length: 10 }, (_, index) => (
+  const skeletonBoxes = Array.from({ length: 7 }, () => (
     <Box
-      key={index}
       sx={{
-        width: 220,
-        padding: 4,
+        width: 180,
+        padding: 0,
         marginRight: 0.5,
         marginLeft: 0.5,
         marginTop: 0,
-        my: 4,
+        my: 0,
       }}
     >
-      <Skeleton variant="rectangular" width={180} height={140} />
-      <Skeleton animation="wave" width={120} height={60} />
-      <Skeleton animation="wave" width={150} height={16} />
-      <Skeleton animation="wave" width={150} height={16} />
-      <Skeleton animation="wave" width={150} height={16} />
-      <Skeleton animation="wave" width={150} height={16} />
+      <Skeleton variant="rectangular" width={160} height={120} />
+      <Skeleton animation="wave" width={120} height={70} />
+      <Skeleton animation="wave" width={150} height={20} />
+      <Skeleton animation="wave" width={150} height={20} />
+      <Skeleton animation="wave" width={150} height={20} />
+      <Skeleton animation="wave" width={150} height={20} />
+      <Skeleton animation="wave" width={150} height={20} />
+      <Skeleton animation="wave" width={150} height={20} />
       <Skeleton variant="rounded" width={180} height={55} />
     </Box>
   ));
@@ -82,8 +83,10 @@ const AddNewRecommendedBanner = () => {
           <Card
             key={product._id}
             sx={{
-              maxWidth: 345,
+              maxWidth: 180,
+              maxHeight: 450,
               margin: "15px",
+              marginTop: "70px",
               borderRadius: "20px",
               boxShadow: "0 0 10px gray",
             }}
@@ -96,7 +99,12 @@ const AddNewRecommendedBanner = () => {
                 alt={product.image.alt}
               />
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  sx={{ height: 60 }}
+                >
                   {product.name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
@@ -123,8 +131,11 @@ const AddNewRecommendedBanner = () => {
                 justifyContent: "center",
               }}
             >
-              <IconButton onClick={() => handleProductClick(product)}>
-                <AddCircleIcon color="primary" />
+              <IconButton>
+                <AddCircleIcon
+                  color="primary"
+                  onClick={() => handleProductClick(product)}
+                />
               </IconButton>
               <ToastContainer />
             </CardActions>
