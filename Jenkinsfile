@@ -39,7 +39,6 @@ pipeline {
             }
         }
     }
-}
     always {
         script {
             cleanWs()
