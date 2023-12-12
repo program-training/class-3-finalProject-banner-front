@@ -38,10 +38,10 @@ pipeline {
                 )
             }
         }
-    }
-    always {
-        script {
-            cleanWs()
+        always {
+            script {
+                cleanWs()
+            }
         }
     }
 }
