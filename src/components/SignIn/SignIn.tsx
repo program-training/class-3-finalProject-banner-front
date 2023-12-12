@@ -50,7 +50,6 @@ export default function SignIn() {
       if (responseUserLogin.status === 200) {
         toast.success("Login successful!");
         dispatchUser(setUser(user));
-
         navigate("/");
       }
     } catch (error) {
@@ -102,10 +101,6 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
             />
             <Button
               type="submit"
