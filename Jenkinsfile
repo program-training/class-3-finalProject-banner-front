@@ -10,33 +10,9 @@ pipeline {
                 }
             }
         }
-
-        stage('Install Dependencies') {
-            steps {
-                script {
-                    // Install Node.js and npm
-                    sh 'curl -sL https://deb.nodesource.com/setup_14.x | bash -'
-                    sh 'apt-get install -y nodejs'
-                    
-                    // Install project dependencies
-                    sh 'npm install'
-                }
-            }
-        }
-
-        stage('Client Build') {
-            steps {
-                script {
-                    sh 'echo "Building..."'
-                    sh 'docker build -t banner-front .'
-                }
-            }
-        }
-        
         stage('Linting') {
             steps {
                 script {
-                    // Run ESLint
                     sh 'npx eslint .'
                 }
             }
@@ -64,5 +40,7 @@ pipeline {
                 )
             }
         }
-    }
-}
+        allways{
+            cleanWs()
+            }
+        }
