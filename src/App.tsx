@@ -29,8 +29,8 @@ function App() {
             <Route path="/addNewRec" element={<AddNewRecommendedBanner />} />
             <Route path="/login" element={<SignIn />} />
             <Route path="/register" element={<SignUp />} />
-            <Route path="/editBanner/:id" element={<RenderFromEdit/>} />
-            <Route path="/api/getBanner" element={<GetBannerIframe />} />
+            <Route path="/editBanner/:id" element={<RenderFromEdit />} />
+            <Route path="/getBanner" element={<GetBannerIframe />} />
           </Route>
         </Routes>
       </BrowserRouter>
