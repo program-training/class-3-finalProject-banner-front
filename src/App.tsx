@@ -13,6 +13,11 @@ import RenderFromEdit from "./components/Banners/HookFormEdit/RenderFormEdit";
 import AddNewBanner from "./components/Banners/AddNewBanner/AddNewBanner";
 import GetBannerInfo from "./components/Banners/GetBannerInfo/GetBannerInfo";
 import GetBannerIframe from "./components/GetBannerIframe/GetBannerIframe";
+
+import GraphsPage from "./components/GraphsPage/GraphsPage";
+import ChartDelete from "./components/GraphTriger/ChartDelete";
+import ChartUsers from "./components/GraphTriger/ChartUsers";
+
 function App() {
   return (
     <>
@@ -31,6 +36,9 @@ function App() {
             <Route path="/register" element={<SignUp />} />
             <Route path="/editBanner/:id" element={<RenderFromEdit />} />
             <Route path="/getBanner" element={<GetBannerIframe />} />
+            <Route path="/graphsPage" element={<GraphsPage />} />
+            <Route path="/chartDelete" element={<ChartDelete />} />
+            <Route path="/chartUsers" element={<ChartUsers />} />
           </Route>
         </Routes>
       </BrowserRouter>
