@@ -18,7 +18,6 @@ pipeline {
             }
         }
     }
-
     post {
         success {
             script {
@@ -40,7 +39,10 @@ pipeline {
                 )
             }
         }
-        allways{
+    always {
+        script {
             cleanWs()
-            }
         }
+    }
+}
+ 
