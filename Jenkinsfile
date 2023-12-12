@@ -12,7 +12,7 @@ pipeline {
         stage('client build') {
             steps {
                 script {
-                        sh 'echo "Building..."'
+                        sh 'echo "Building...."'
                         sh 'docker build -t banner-front .'
                 }
             }
