@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     echo 'Installing dependencies...'
-                    sh 'npm i eslint'
+                    sh 'npm i -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint'
                 }
             }
         }
