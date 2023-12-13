@@ -14,7 +14,7 @@ pipeline {
                 script {
                     dir('client') {
                         sh 'echo "linting..."'
-                        sh 'npm run lint'
+                        sh 'npm run eslint'
                     }
                 }
             }
