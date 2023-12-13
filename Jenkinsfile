@@ -10,8 +10,10 @@ pipeline {
             }
         }
         stage('clean work space'){
-            script {
-                sh 'npm cache clean --force'
+            steps{
+                script {
+                    sh 'npm cache clean --force'
+                }
             }
         }
         stage('Install Dependencies') {
