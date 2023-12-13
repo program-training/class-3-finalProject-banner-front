@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     echo 'Installing dependencies...'
-                    sh 'npm install lint'
+                    sh 'npm i eslint'
                 }
             }
         }
