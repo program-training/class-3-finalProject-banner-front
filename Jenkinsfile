@@ -47,10 +47,5 @@ pipeline {
                 )
             }
         }
-        always {
-            script {
-                cleanWs()
-            }
-        }
     }
 }
