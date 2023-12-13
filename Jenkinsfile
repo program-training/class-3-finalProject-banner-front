@@ -9,6 +9,11 @@ pipeline {
                 }
             }
         }
+        stage('clean work space'){
+            script {
+                sh 'npm cache clean --force'
+            }
+        }
         stage('Install Dependencies') {
             steps {
                 script {
