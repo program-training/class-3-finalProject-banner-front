@@ -20,10 +20,8 @@ pipeline {
         stage('client lint') {
             steps {
                 script {
-                    dir('client') {
-                        sh 'echo "linting..."'
-                        sh 'npm run lint'
-                    }
+                    sh 'echo "linting..."'
+                    sh 'npm run lint'
                 }
             }
         }
