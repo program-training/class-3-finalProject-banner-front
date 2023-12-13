@@ -9,12 +9,19 @@ pipeline {
                 }
             }
         }
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    echo 'Installing dependencies...'
+                    sh 'npm install'
+                }
+            }
+        }
         stage('client lint') {
             steps {
                 script {
                     dir('client') {
                         sh 'echo "linting..."'
-                        sh 'npm i'
                         sh 'npm run lint'
                     }
                 }
