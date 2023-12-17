@@ -8,10 +8,9 @@ import {
   Box,
   styled,
 } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { useFetchBanners } from "../../../utils/useFetchBanners";
 import { SelectChangeEvent } from "@mui/material";
-import { SubmitHandler } from "react-hook-form";
 import { CategoryInterface } from "../../../utils/interfaces";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -19,10 +18,15 @@ import { ErrorMessage } from "@hookform/error-message";
 
 type FormData = {
   url: string;
+  category: string;
+  image: {
+    url: string;
+    alt: string;
+  };
   title: string;
   text: string;
-  category: string;
-  image: File | null;
+  createAt: string;
+  author: string;
 };
 
 const StyledForm = styled(Box)`
@@ -38,6 +42,8 @@ const AddNewBanner = () => {
     url: "",
     title: "",
     text: "",
+    createAt: "",
+    author: "",
   });
 
   const [selectedCategory, setSelectedCategory] =
@@ -143,6 +149,30 @@ const AddNewBanner = () => {
           </Select>
         </FormControl>
         <ErrorMessage errors={errors} name="Category" />
+
+        <FormControl sx={{ marginBottom: "16px" }}>
+          <TextField
+            {...register("createAt")}
+            label="createAt"
+            value={formData.createAt}
+            onChange={(event) =>
+              handleInputChange("createAt", event.target.value)
+            }
+          />
+        </FormControl>
+        <ErrorMessage errors={errors} name="createAt" />
+
+        <FormControl sx={{ marginBottom: "16px" }}>
+          <TextField
+            {...register("author")}
+            label="author"
+            value={formData.author}
+            onChange={(event) =>
+              handleInputChange("author", event.target.value)
+            }
+          />
+        </FormControl>
+        <ErrorMessage errors={errors} name="author" />
 
         <Button type="submit" variant="contained" color="primary">
           Submit
