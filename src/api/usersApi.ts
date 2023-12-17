@@ -20,6 +20,7 @@ export async function userRegister(userData: UserReg) {
 }
 
 export async function userLogin(userData: UserLogin) {
+  console.log(import.meta.env.VITE_BASE_URL)
   const config = {
     method: "post",
     maxBodyLength: Infinity,

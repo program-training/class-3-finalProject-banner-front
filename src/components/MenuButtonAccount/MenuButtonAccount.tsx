@@ -8,10 +8,15 @@ import { Badge, IconButton } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogOut } from "../../redux/features/user/userReducer";
+import { RootState } from "../../redux/store";
 
 export default function MenuButtonAccount() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [isLoggedIn] = useState(false);
+  const dispatchUser = useDispatch();
+  const user = useSelector((state: RootState) => state.user.user);
+  // const [isLoggedIn] = useState(user?.isConnected == true);
   const navigate = useNavigate();
 
   const isMenuOpen = Boolean(anchorEl);
@@ -32,52 +37,66 @@ export default function MenuButtonAccount() {
     navigate("/register");
   };
 
-  const handleLogHot = () => {};
+  const handleLogHot = () => {
+    dispatchUser(userLogOut());
+    navigate("/");
+  };
 
   const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
+
+  const renderMenuIsLogin = (
+    <Menu 
       anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
+      anchorOrigin={{ vertical: "top", horizontal: "right", }}
       id={menuId}
       keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
+      transformOrigin={{ vertical: "top", horizontal: "right", }}
       open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem
-        onClick={() => {
-          // handleMenuClose();
-          handleLogIn();
-        }}
-      >
-        {" "}
-        <HowToRegIcon /> Log In{" "}
-      </MenuItem>
-      <MenuItem
-        onClick={() => {
-          handleMenuClose();
-          handleRegister();
-        }}
-      >
-        <PersonAddIcon /> Register{" "}
-      </MenuItem>
+      onClose={handleMenuClose}>
+
       <MenuItem
         onClick={() => {
           handleMenuClose();
           handleLogHot();
-        }}
-      >
-        <ExitToAppIcon /> Log Hot
+        }}>
+        <ExitToAppIcon /> Log Out
       </MenuItem>
+
     </Menu>
   );
+
+
+  const renderMenuIsLogout = (
+    <Menu 
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right", }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{ vertical: "top", horizontal: "right", }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}>
+
+        <MenuItem
+          onClick={() => {
+            handleMenuClose();
+            handleLogIn();
+          }}>
+          {" "}
+          <HowToRegIcon /> Log In{" "}
+        </MenuItem>
+
+      
+      <MenuItem
+        onClick={() => {
+          handleMenuClose();
+          handleRegister();
+        }}>
+        <PersonAddIcon /> Register{" "}
+      </MenuItem>
+
+    </Menu>
+  );
+
   return (
     <Box sx={{ margin: "5px" }}>
       <IconButton
@@ -89,19 +108,19 @@ export default function MenuButtonAccount() {
         onClick={handleProfileMenuOpen}
         color="inherit"
       >
-        {isLoggedIn && (
+        {user?.isConnected && (
           <Badge
             overlap="circular"
             anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
             variant="dot"
-            color="success"
-          >
+            color="success">
             <AccountCircle />
           </Badge>
         )}
-        {!isLoggedIn && <AccountCircle />}
+        {!user?.isConnected && <AccountCircle />}
       </IconButton>
-      {renderMenu}
+
+      {user?.isConnected ? renderMenuIsLogin : renderMenuIsLogout}
     </Box>
   );
 }
