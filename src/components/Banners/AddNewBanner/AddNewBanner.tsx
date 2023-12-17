@@ -8,10 +8,9 @@ import {
   Box,
   styled,
 } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { useFetchBanners } from "../../../utils/useFetchBanners";
 import { SelectChangeEvent } from "@mui/material";
-import { SubmitHandler } from "react-hook-form";
 import { CategoryInterface } from "../../../utils/interfaces";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -43,8 +42,8 @@ const AddNewBanner = () => {
     url: "",
     title: "",
     text: "",
-    createAt: "", 
-    author: ""
+    createAt: "",
+    author: "",
   });
 
   const [selectedCategory, setSelectedCategory] =
@@ -156,7 +155,9 @@ const AddNewBanner = () => {
             {...register("createAt")}
             label="createAt"
             value={formData.createAt}
-            onChange={(event) => handleInputChange("createAt", event.target.value)}
+            onChange={(event) =>
+              handleInputChange("createAt", event.target.value)
+            }
           />
         </FormControl>
         <ErrorMessage errors={errors} name="createAt" />
@@ -166,7 +167,9 @@ const AddNewBanner = () => {
             {...register("author")}
             label="author"
             value={formData.author}
-            onChange={(event) => handleInputChange("author", event.target.value)}
+            onChange={(event) =>
+              handleInputChange("author", event.target.value)
+            }
           />
         </FormControl>
         <ErrorMessage errors={errors} name="author" />
