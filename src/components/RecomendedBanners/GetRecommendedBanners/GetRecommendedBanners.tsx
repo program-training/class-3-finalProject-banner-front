@@ -24,7 +24,7 @@ import { GET_REC_PRODUCTS } from "../../GraphQl/query's";
 import { ProductInterface } from "../../../utils/interfaces";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useMutation, useQuery } from "@apollo/client";
-import { DELETE_REC_BANNER } from "../../GraphQl/mutation";
+import { DELETE_REC_PRODUCT } from "../../GraphQl/mutation";
 import { client } from "../../../main";
 
 
@@ -32,7 +32,7 @@ const GetRecommendedBanners = () => {
   const { data, loading, error } = useQuery(GET_REC_PRODUCTS);
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedBannerId, setSelectedBannerId] = useState("");
-  const [deleteRecProduct] = useMutation(DELETE_REC_BANNER);
+  const [deleteRecProduct] = useMutation(DELETE_REC_PRODUCT);
 
 
 
@@ -76,23 +76,17 @@ const GetRecommendedBanners = () => {
 
   const handleDelete = async () => {
     try {
-      await deleteRecProduct({
-        variables: { bannerId: selectedBannerId },
-        refetchQueries: [{ query: GET_REC_PRODUCTS }],
+      const { data } = await deleteRecProduct({
+        variables: { id: selectedBannerId },
       });
   
-      // Log the updated data
-      const updatedData = await client.query({
-        query: GET_REC_PRODUCTS,
-      });
-      console.log("Updated Data:", updatedData.data.recProducts);
-  
+      console.log('Product deleted:', data.deleteRecProduct);
       toast.success("Banner deleted successfully!");
       handleDialogClose();
-    } catch (err) {
+    } catch (error) {
       toast.error("Failed to delete the banner.");
       handleDialogClose();
-      console.error(err);
+      console.error('Error deleting product:', error);
     }
   };
   

@@ -21,10 +21,25 @@ export const CREATE_REC_PRODUCT = gql`
   }
 `;
 
-export const DELETE_REC_BANNER = gql `
-  mutation DeleteRecBanner($id: ID!) {
-    deleteRecProduct(id: $id)
+export const DELETE_REC_PRODUCT = gql`
+  mutation DeleteRecProduct($id: ID!) {
+    deleteRecProduct(id: $id) {
+      productId
       _id
       name
+      salePrice
+      quantity
+      description
+      category
+      discountPercentage
+      image {
+        large
+        medium
+        small
+        alt
+      }
+      createdAt
+      author
+    }
   }
-`
+`;
