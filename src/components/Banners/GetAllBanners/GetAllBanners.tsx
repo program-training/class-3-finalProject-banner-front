@@ -18,10 +18,30 @@ import Grid from "@mui/material/Grid";
 import Skeleton from "@mui/material/Skeleton";
 import { useNavigate } from "react-router-dom";
 import "./GetAllBanners.css";
+import { useQuery } from "@apollo/client";
+import { GET_ALL_BANNERS } from "../../GraphQl/query's";
+import { BannersInterFace } from "../../../utils/interfaces";
 export default function GetAllBanners() {
   const navigate = useNavigate();
 
-  const { allBanners, setAllBanners } = useFetchBanners(`/banners/allBanners`);
+  const { data, error, loading } = useQuery(GET_ALL_BANNERS)
+
+  if (loading) {
+    return (
+      <p>loading...</p>
+    )
+  }
+
+  if (error) {
+    return (
+      <p>{error.message}</p>
+    )
+  }
+
+  const allBanners = data.getAllBanners;
+  console.log("data", allBanners)
+
+  // const { allBanners, setAllBanners } = useFetchBanners(`/banners/allBanners`);
 
   const skeletonBoxes = Array.from({ length: 8 }, (_, index) => (
     <Box key={index} sx={{ width: 220, marginRight: 4, marginTop: 0, my: 4 }}>
@@ -33,21 +53,21 @@ export default function GetAllBanners() {
     </Box>
   ));
 
-  const handleDeleteClick = async (bannerId: string) => {
-    try {
-      await axios.delete(
-        `${import.meta.env.VITE_BASE_URL}/banners/banner/${bannerId}`
-      );
-      setAllBanners((prevBanners) =>
-        prevBanners.filter((banner) => banner._id !== bannerId)
-      );
-      toast.success("Banner deleted successfully");
-    } catch (err) {
-      console.error(err);
-      toast.error("Error deleting banner");
-      throw err;
-    }
-  };
+  // const handleDeleteClick = async (bannerId: string) => {
+  //   try {
+  //     await axios.delete(
+  //       `${import.meta.env.VITE_BASE_URL}/banners/banner/${bannerId}`
+  //     );
+  //     setAllBanners((prevBanners) =>
+  //       prevBanners.filter((banner) => banner._id !== bannerId)
+  //     );
+  //     toast.success("Banner deleted successfully");
+  //   } catch (err) {
+  //     console.error(err);
+  //     toast.error("Error deleting banner");
+  //     throw err;
+  //   }
+  // };
 
   const handleClickPrevent = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -56,7 +76,7 @@ export default function GetAllBanners() {
   return (
     <div className="bannerStyle">
       {allBanners.length > 0 ? (
-        allBanners.map((banner) => (
+        allBanners.map((banner: BannersInterFace) => (
           <Link
             key={banner._id}
             to={`/getBannerInfo/${banner._id}`}
@@ -102,7 +122,7 @@ export default function GetAllBanners() {
                   <IconButton
                     onClick={(event) => {
                       handleClickPrevent(event);
-                      handleDeleteClick(banner._id);
+                      // handleDeleteClick(banner._id);
                     }}
                   >
                     <DeleteIcon />

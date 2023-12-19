@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import "./GetRecommendedBanners.css";
-import axios from "axios";
-import { useFetchRecBanners } from "../../../utils/useFetchRecBanners";
 import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -22,11 +20,35 @@ import { ToastContainer, toast } from "react-toastify";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
+import { GET_REC_PRODUCTS } from "../../GraphQl/query's";
+import { ProductInterface } from "../../../utils/interfaces";
+import CircularProgress from "@mui/material/CircularProgress";
+import { useMutation, useQuery } from "@apollo/client";
+import { DELETE_REC_BANNER } from "../../GraphQl/mutation";
+import { client } from "../../../main";
+
 
 const GetRecommendedBanners = () => {
-  const { recommendedBanners, setRecommendedBanners } = useFetchRecBanners(
-    "/recommended/recProducts"
-  );
+  const { data, loading, error } = useQuery(GET_REC_PRODUCTS);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [selectedBannerId, setSelectedBannerId] = useState("");
+  const [deleteRecProduct] = useMutation(DELETE_REC_BANNER);
+
+
+
+  if (loading) {
+    return (
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+        <CircularProgress />
+      </div>
+    );
+  }
+  if (error) {
+    console.error(error);
+    return <p>Error: {error.message}</p>;
+  }
+  const myData = data.recProducts
+
 
   const skeletonBoxes = Array.from({ length: 8 }, (_, index) => (
     <Box key={index} sx={{ width: 220, marginRight: 4, marginTop: 0, my: 4 }}>
@@ -40,8 +62,7 @@ const GetRecommendedBanners = () => {
     </Box>
   ));
 
-  const [openDialog, setOpenDialog] = useState(false);
-  const [selectedBannerId, setSelectedBannerId] = useState("");
+
 
   const handleClick = (bannerId: string) => {
     setOpenDialog(true);
@@ -55,22 +76,47 @@ const GetRecommendedBanners = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(
-        `${
-          import.meta.env.VITE_BASE_URL
-        }/recommended/recProduct/${selectedBannerId}`
-      );
-      setRecommendedBanners((prevBanners) =>
-        prevBanners.filter((banner) => banner._id !== selectedBannerId)
-      );
+      await deleteRecProduct({
+        variables: { bannerId: selectedBannerId },
+        refetchQueries: [{ query: GET_REC_PRODUCTS }],
+      });
+  
+      // Log the updated data
+      const updatedData = await client.query({
+        query: GET_REC_PRODUCTS,
+      });
+      console.log("Updated Data:", updatedData.data.recProducts);
+  
       toast.success("Banner deleted successfully!");
       handleDialogClose();
     } catch (err) {
       toast.error("Failed to delete the banner.");
       handleDialogClose();
-      throw err;
+      console.error(err);
     }
   };
+  
+
+  
+
+  // const handleDelete = async () => {
+  //   try {
+  //     await axios.delete(
+  //       `${
+  //         import.meta.env.VITE_BASE_URL
+  //       }/recommended/recProduct/${selectedBannerId}`
+  //     );
+  //     setRecommendedBanners((prevBanners) =>
+  //       prevBanners.filter((banner) => banner._id !== selectedBannerId)
+  //     );
+  //     toast.success("Banner deleted successfully!");
+  //     handleDialogClose();
+  //   } catch (err) {
+  //     toast.error("Failed to delete the banner.");
+  //     handleDialogClose();
+  //     throw err;
+  //   }
+  // };
 
   const handleClickStop = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -78,8 +124,8 @@ const GetRecommendedBanners = () => {
 
   return (
     <div className="cardsRacContainer">
-      {recommendedBanners.length > 0 ? (
-        recommendedBanners.map((banner) => (
+      {myData.length > 0 ? (
+        myData.map((banner: ProductInterface) => (
           <div key={banner._id}>
             <Link to={`/recBannerInfo/${banner._id}`}>
               <Card
@@ -91,11 +137,11 @@ const GetRecommendedBanners = () => {
                 }}
               >
                 <CardActionArea>
-                  <CardMedia
-                    sx={{ height: 150 }}
-                    image={banner.image.medium}
-                    title={banner.image.alt}
-                  />
+                <CardMedia
+                  sx={{ height: 150 }}
+                  image={banner.image.medium}
+                  title={banner.image.alt}
+                />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                       {banner.name}
@@ -110,8 +156,9 @@ const GetRecommendedBanners = () => {
                       created by: {banner.author}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      at: {banner.createdAt.toLocaleString()}
+                      at: {new Date(banner.createdAt).toLocaleString()}
                     </Typography>
+
                   </CardContent>
                 </CardActionArea>
                 <CardActions
@@ -131,10 +178,10 @@ const GetRecommendedBanners = () => {
                   >
                     <DeleteIcon />
                   </IconButton>
-                  <ToastContainer />
                 </CardActions>
               </Card>
             </Link>
+            <ToastContainer />
           </div>
         ))
       ) : (
