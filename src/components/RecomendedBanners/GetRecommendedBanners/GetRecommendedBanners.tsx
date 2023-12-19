@@ -25,7 +25,6 @@ import { ProductInterface } from "../../../utils/interfaces";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useMutation, useQuery } from "@apollo/client";
 import { DELETE_REC_PRODUCT } from "../../GraphQl/mutation";
-import { client } from "../../../main";
 
 
 const GetRecommendedBanners = () => {

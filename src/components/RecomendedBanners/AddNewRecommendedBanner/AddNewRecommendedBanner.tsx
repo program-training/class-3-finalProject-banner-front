@@ -172,10 +172,7 @@ const AddNewRecommendedBanner = () => {
   // const { products } = useFetchRecBanners("/recommended/allProducts");
   const { products, setProducts } = useFetchRecBanners('/recommended/allProducts');
 
-  const [createRecProduct, { data, loading, error }] = useMutation(CREATE_REC_PRODUCT);
-
-  if (loading) return 'Submitting...';
-  if (error) return `Submission error! ${error.message}`;
+  const [createRecProduct] = useMutation(CREATE_REC_PRODUCT);
 
   // const productsData  = data?.createRecProduct || [];
   // console.log("products", productsData)
@@ -208,7 +205,8 @@ const AddNewRecommendedBanner = () => {
   const handleProductClick = async (product: ProductInterface) => {
     try {
       const newBannerData = {
-        _id: product._id,
+        productId: product._id,
+        _id: product._id+1,
         name: product.name,
         salePrice: product.salePrice,
         quantity: product.quantity,
@@ -222,29 +220,31 @@ const AddNewRecommendedBanner = () => {
           alt: product.image.alt,
         },
         createdAt: new Date(),
-        author: product.author,
+        author: "zeev",
       };
-      const res = await createRecProduct({
+      console.log(newBannerData)
+  
+      const { data } = await createRecProduct({
         variables: {
-          newRecBanner: newBannerData,
+          input: newBannerData,
         },
       });
+      console.log("Mutation response:", data);
 
-      if (!res.errors) {
-        console.log("Banner created:", res.data?.createRecProduct);
-        toast.success("Banner created successfully!");
-        return data
+       if (data?.createRecProduct) {
+      console.log("Banner created:", data.createRecProduct);
+      toast.success("Banner created successfully!");
   
-        // Update local state with the new banner
-        // setProducts((prevProducts) => [...prevProducts, res.data?.createRecProduct]);
-      } else {
-        console.log("Error creating banner", res.errors);
-        toast.error("Failed to create the rec banner.");
-      }
+    } else {
+      console.error("Mutation response does not contain createRecProduct:", data);
+      toast.error("Failed to create the rec banner.");
+    }
     } catch (err) {
       console.error(err);
+      toast.error("Failed to create the rec banner.");
     }
   };
+  
 
   return (
     <div className="addNewBannerPage">

@@ -1,22 +1,24 @@
 import { gql } from "@apollo/client";
 
 export const CREATE_REC_PRODUCT = gql`
-  mutation CreateNewBanner($newRecBanner: ProductInput!) {
-    createRecProduct(newRecBanner: $newRecBanner) {
+  mutation CreateRecProduct($input: NewRecProductInput!) {
+    createRecProduct(input: $input) {
+      productId
       _id
       name
-      author
-      category
-      createdAt
-      description
-      discountPercentage
-      productId
-      quantity
       salePrice
+      quantity
+      description
+      category
+      discountPercentage
       image {
-        alt
+        large
         medium
+        small
+        alt
       }
+      createdAt
+      author
     }
   }
 `;
