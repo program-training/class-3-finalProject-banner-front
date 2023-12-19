@@ -36,3 +36,24 @@ export interface CategoryInterface {
   image: string;
 }
 
+
+export interface ProductInput {
+  name: string;
+  salePrice: number;
+  quantity: number;
+  description?: string;
+  category?: string;
+  discountPercentage?: number;
+  image?: ImageInput;
+  createdAt?: string; // Assuming your GraphQL server expects a string for DateTime
+  author?: string;
+}
+
+export interface ImageInput {
+  large?: string;
+  medium?: string;
+  small?: string;
+  alt?: string;
+}
+
+

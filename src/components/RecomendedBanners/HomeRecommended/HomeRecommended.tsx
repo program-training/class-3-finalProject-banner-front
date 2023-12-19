@@ -12,9 +12,9 @@ export default function HomeRecommended() {
       <div className="cardsRec">
         <GetRecommendedBanners />
       </div>
-      <div className="charts">
+      {/* <div className="charts">
         < Test/>
-      </div>
+      </div> */}
     </div>
   );
 }
