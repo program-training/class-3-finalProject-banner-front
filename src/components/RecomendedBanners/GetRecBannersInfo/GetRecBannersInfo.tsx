@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import "./GetRecBannersInfo.css";
 import Card from "@mui/material/Card";
@@ -17,19 +18,32 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
+import { GET_REC_PRODUCTS_BY_ID } from "../../GraphQl/query's";
+import { useQuery } from "@apollo/client";
 
 const GetRecBannersInfo = () => {
-  const params = useParams();
   const navigate = useNavigate();
   const [openDialog, setOpenDialog] = useState(false);
 
-  const { recBannerById } = useFetchRecBanners(
-    `/recommended/recProductsById/${params.id}`
-  );
+  const { id } = useParams();
+  console.log("ID from params:", id);
 
-  const { setRecommendedBanners } = useFetchRecBanners(
-    "/recommended/recProducts"
-  );
+  const { data, error, loading } = useQuery(GET_REC_PRODUCTS_BY_ID, {
+    variables: { id }, // Ensure that the variable is passed correctly
+  });
+  
+  
+
+ 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  const recBannerById = data?.recProductById
+  console.log("recID",recBannerById)
+
+  // const { setRecommendedBanners } = useFetchRecBanners(
+  //   "/recommended/recProducts"
+  // );
 
   const handleClick = () => {
     setOpenDialog(true);
@@ -39,23 +53,23 @@ const GetRecBannersInfo = () => {
     setOpenDialog(false);
   };
 
-  const handleDelete = async () => {
-    try {
-      await axios.delete(
-        `${
-          import.meta.env.VITE_BASE_URL
-        }/recommended/recProduct/${params.id}`
-      );
-      setRecommendedBanners((prevBanners) =>
-        prevBanners.filter((banner) => banner._id !== params.id)
-      );
-      toast.success("Banner deleted successfully!");
-      setTimeout(() => navigate("/"), 6000);
-    } catch (err) {
-      toast.error("Failed to delete the banner.");
-      throw err;
-    }
-  };
+  // const handleDelete = async () => {
+  //   try {
+  //     await axios.delete(
+  //       `${
+  //         import.meta.env.VITE_BASE_URL
+  //       }/recommended/recProduct/${params.id}`
+  //     );
+  //     // setRecommendedBanners((prevBanners) =>
+  //     //   prevBanners.filter((banner) => banner._id !== params.id)
+  //     // );
+  //     toast.success("Banner deleted successfully!");
+  //     setTimeout(() => navigate("/"), 6000);
+  //   } catch (err) {
+  //     toast.error("Failed to delete the banner.");
+  //     throw err;
+  //   }
+  // };
 
   return (
     <div className="cardRecPage">
@@ -135,9 +149,9 @@ const GetRecBannersInfo = () => {
           <IconButton onClick={handleDialogClose} color="primary">
             Back
           </IconButton>
-          <IconButton onClick={handleDelete} color="error">
+          {/* <IconButton onClick={handleDelete} color="error">
             OK
-          </IconButton>
+          </IconButton> */}
         </DialogActions>
       </Dialog>
     </div>

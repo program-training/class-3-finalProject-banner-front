@@ -1,0 +1,26 @@
+.chart-bar-container {
+    width: 600px;
+}
+
+.chart-pie-container {
+    width: 600px;
+    height: 500px;
+}
+
+.chart-line-container {
+    width: 600px;
+    height: 500px;
+}
+
+.App {
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+    align-items:center ;
+    flex-wrap: wrap;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+}

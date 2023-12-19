@@ -26,19 +26,13 @@ export default function HeaderMenuItem() {
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
+      anchorOrigin={{ vertical: "top", horizontal: "right", }}
       id={mobileMenuId}
       keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
+      transformOrigin={{ vertical: "top",  horizontal: "right", }}
       open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
+      onClose={handleMobileMenuClose} >
+
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge>
@@ -47,18 +41,19 @@ export default function HeaderMenuItem() {
         </IconButton>
         <p>Home</p>
       </MenuItem>
+
       <MenuItem>
         <IconButton
           size="large"
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          color="inherit"
-        >
-          <MenuButtonAccount />
+          color="inherit" >
+            <MenuButtonAccount />
         </IconButton>
         <p>Profile</p>
       </MenuItem>
+
     </Menu>
   );
   return (
@@ -69,9 +64,8 @@ export default function HeaderMenuItem() {
         aria-controls={mobileMenuId}
         aria-haspopup="true"
         onClick={handleMobileMenuOpen}
-        color="inherit"
-      >
-        <MoreIcon />
+        color="inherit" >
+          <MoreIcon />
       </IconButton>
       {renderMobileMenu}
     </Box>

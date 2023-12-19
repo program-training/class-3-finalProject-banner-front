@@ -8,20 +8,25 @@ import {
   Box,
   styled,
 } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { useFetchBanners } from "../../../utils/useFetchBanners";
 import { SelectChangeEvent } from "@mui/material";
-import { SubmitHandler } from "react-hook-form";
 import { CategoryInterface } from "../../../utils/interfaces";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { ErrorMessage } from "@hookform/error-message";
+
 type FormData = {
   url: string;
+  category: string;
+  image: {
+    url: string;
+    alt: string;
+  };
   title: string;
   text: string;
-  category: string;
-  image: File | null;
+  createAt: string;
+  author: string;
 };
 
 const StyledForm = styled(Box)`
@@ -37,6 +42,8 @@ const AddNewBanner = () => {
     url: "",
     title: "",
     text: "",
+    createAt: "",
+    author: "",
   });
 
   const [selectedCategory, setSelectedCategory] =
@@ -93,7 +100,7 @@ const AddNewBanner = () => {
             label="URL"
           />
         </FormControl>
-        {/* <ErrorMessage errors={errors} name="url" /> */}
+        <ErrorMessage errors={errors} name="url" />
 
         <FormControl sx={{ marginBottom: "16px" }}>
           <TextField
@@ -103,17 +110,17 @@ const AddNewBanner = () => {
             onChange={(event) => handleInputChange("title", event.target.value)}
           />
         </FormControl>
-        {/* <ErrorMessage errors={errors} name="title" /> */}
+        <ErrorMessage errors={errors} name="title" />
 
         <FormControl sx={{ marginBottom: "16px" }}>
           <TextField
             {...register("text")}
             label="Text"
-            // value={formData.text}
+            value={formData.text}
             onChange={(event) => handleInputChange("text", event.target.value)}
           />
         </FormControl>
-        {/* <ErrorMessage errors={errors} name="text" /> */}
+        <ErrorMessage errors={errors} name="text" />
 
         <FormControl sx={{ marginBottom: "16px" }}>
           <input name="file" type="file" onChange={handleImageChange} />
@@ -125,7 +132,7 @@ const AddNewBanner = () => {
             />
           )}
         </FormControl>
-        {/* <ErrorMessage errors={errors} name="image" /> */}
+        <ErrorMessage errors={errors} name="image" />
 
         <FormControl sx={{ marginBottom: "16px" }}>
           <Select
@@ -141,7 +148,31 @@ const AddNewBanner = () => {
             ))}
           </Select>
         </FormControl>
-        {/* <ErrorMessage errors={errors} name="Category" /> */}
+        <ErrorMessage errors={errors} name="Category" />
+
+        <FormControl sx={{ marginBottom: "16px" }}>
+          <TextField
+            {...register("createAt")}
+            label="createAt"
+            value={formData.createAt}
+            onChange={(event) =>
+              handleInputChange("createAt", event.target.value)
+            }
+          />
+        </FormControl>
+        <ErrorMessage errors={errors} name="createAt" />
+
+        <FormControl sx={{ marginBottom: "16px" }}>
+          <TextField
+            {...register("author")}
+            label="author"
+            value={formData.author}
+            onChange={(event) =>
+              handleInputChange("author", event.target.value)
+            }
+          />
+        </FormControl>
+        <ErrorMessage errors={errors} name="author" />
 
         <Button type="submit" variant="contained" color="primary">
           Submit
