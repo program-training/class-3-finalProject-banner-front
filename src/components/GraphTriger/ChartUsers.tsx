@@ -6,6 +6,7 @@ import BarChart from "./bar";
 import PieChart from "./pia";
 import LineChart from "./line";
 import './barStyle.css';
+import { VITE_BASE_URL } from "../../env/env";
 
 Chart.register(CategoryScale);
 
@@ -46,7 +47,7 @@ export default function ChartUsers() {
   });
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_BASE_URL}/logsPostgresql/allHours/${formattedDate}`)
+    axios.get(`${VITE_BASE_URL}/logsPostgresql/allHours/${formattedDate}`)
       .then(response => {
         const newData: DataInterface[] = response.data;
         const newChartData = {

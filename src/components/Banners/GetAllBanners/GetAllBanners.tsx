@@ -18,6 +18,7 @@ import Grid from "@mui/material/Grid";
 import Skeleton from "@mui/material/Skeleton";
 import { useNavigate } from "react-router-dom";
 import "./GetAllBanners.css";
+import { VITE_BASE_URL } from "../../../env/env";
 export default function GetAllBanners() {
   const navigate = useNavigate();
 
@@ -36,7 +37,7 @@ export default function GetAllBanners() {
   const handleDeleteClick = async (bannerId: string) => {
     try {
       await axios.delete(
-        `${import.meta.env.VITE_BASE_URL}/banners/banner/${bannerId}`
+        `${VITE_BASE_URL}/banners/banner/${bannerId}`
       );
       setAllBanners((prevBanners) =>
         prevBanners.filter((banner) => banner._id !== bannerId)

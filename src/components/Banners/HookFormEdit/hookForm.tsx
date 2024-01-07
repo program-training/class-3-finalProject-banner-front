@@ -7,6 +7,7 @@ import { useFetchBanners } from "../../../utils/useFetchBanners";
 import { SelectChangeEvent } from "@mui/material";
 import { MenuItem, Select,  FormControl, InputLabel } from "@mui/material";
 import { useNavigate } from "react-router";
+import { VITE_BASE_URL } from "../../../env/env";
 
 
 type FormValues = {
@@ -40,7 +41,7 @@ export default function HookFormEdit({
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
       await axios.put(
-        `${import.meta.env.VITE_BASE_URL}/banners/banner/${defaultValues._id}`,
+        `${VITE_BASE_URL}/banners/banner/${defaultValues._id}`,
         data
       );
       console.log(data);

@@ -17,6 +17,7 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
+import { VITE_BASE_URL } from "../../../env/env";
 
 const GetRecBannersInfo = () => {
   const params = useParams();
@@ -43,7 +44,7 @@ const GetRecBannersInfo = () => {
     try {
       await axios.delete(
         `${
-          import.meta.env.VITE_BASE_URL
+          VITE_BASE_URL
         }/recommended/recProduct/${params.id}`
       );
       setRecommendedBanners((prevBanners) =>

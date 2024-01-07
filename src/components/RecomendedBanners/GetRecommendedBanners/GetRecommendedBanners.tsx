@@ -22,6 +22,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
+import { VITE_BASE_URL } from "../../../env/env";
 
 const GetRecommendedBanners = () => {
   const { recommendedBanners, setRecommendedBanners } = useFetchRecBanners(
@@ -57,7 +58,7 @@ const GetRecommendedBanners = () => {
     try {
       await axios.delete(
         `${
-          import.meta.env.VITE_BASE_URL
+          VITE_BASE_URL
         }/recommended/recProduct/${selectedBannerId}`
       );
       setRecommendedBanners((prevBanners) =>

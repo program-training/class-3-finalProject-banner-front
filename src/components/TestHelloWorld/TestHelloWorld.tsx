@@ -1,13 +1,14 @@
 // import styles from "./TestHelloWorld.module.css";
 import axios from "axios";
 import { useState } from "react";
+import { VITE_BASE_URL } from "../../env/env";
 export default function HelloWorld() {
   const [getFromData, setGetFromData] = useState(null);
 
   const handelClick = async () => {
     try {
       
-      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/hello`);
+      const response = await axios.get(`${VITE_BASE_URL}/hello`);
       setGetFromData(response.data);
     } catch (error) {
       console.error("error to fetch data", error);

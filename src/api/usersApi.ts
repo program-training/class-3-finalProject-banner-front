@@ -1,11 +1,12 @@
 import axios from "axios";
 import { UserLogin, UserReg } from "../interfaces/User";
+import { VITE_BASE_URL } from "../env/env";
 
 export async function userRegister(userData: UserReg) {
   const config = {
     method: "post",
     maxBodyLength: Infinity,
-    url: `${import.meta.env.VITE_BASE_URL}/users/register/`,
+    url: `${VITE_BASE_URL}/users/register/`,
     headers: {
       "Content-Type": "application/json",
     },
@@ -20,11 +21,11 @@ export async function userRegister(userData: UserReg) {
 }
 
 export async function userLogin(userData: UserLogin) {
-  console.log(import.meta.env.VITE_BASE_URL)
+  console.log(VITE_BASE_URL)
   const config = {
     method: "post",
     maxBodyLength: Infinity,
-    url: `${import.meta.env.VITE_BASE_URL}/users/login/`,
+    url: `${VITE_BASE_URL}/users/login/`,
     headers: {
       "Content-Type": "application/json",
     },

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ProductInterface } from "./interfaces";
+import { VITE_BASE_URL } from "../env/env";
 
 export const useFetchRecBanners = (url: string) => {
   const [recommendedBanners, setRecommendedBanners] = useState<
@@ -12,7 +13,7 @@ export const useFetchRecBanners = (url: string) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}${url}`);
+        const res = await axios.get(`${VITE_BASE_URL}${url}`);
         if (res.status < 300 && res.status >= 200) {
           const data = res.data;
           setRecommendedBanners(data);
