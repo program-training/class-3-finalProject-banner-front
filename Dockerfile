@@ -28,7 +28,7 @@ RUN npm run build
 # Stage 2: Production Stage
 FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
-COPY ./src/nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY ./src/templates /etc/nginx/templates
 
 EXPOSE 80
 
