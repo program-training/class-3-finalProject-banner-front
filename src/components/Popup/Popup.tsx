@@ -1,10 +1,8 @@
 // import styles from './Popup.module.css';
-
 import { useState, useEffect, useCallback } from "react";
 import { styled, Theme } from "@mui/system";
 import {
   Unstable_Popup as BasePopup,
-  PopupChildrenProps,
 } from "@mui/base/Unstable_Popup";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -24,7 +22,7 @@ export default function AnimatedPopup({
         Show Login
       </Button> */}
       <BasePopup anchor={anchor} open={open} withTransition>
-        {(props: PopupChildrenProps) => (
+        {(props: any) => (
           <PopAnimation {...props}>
             <div
               className="font-icon-wrapper"
